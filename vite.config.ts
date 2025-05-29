@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   define: {
     "process.env.TLDRAW_WORKER_URL":
-      "'https://tldraw-worker.visnup.workers.dev'",
+      process.env.TLDRAW_WORKER_URL ?? "'http://localhost:5172'",
   },
 });
