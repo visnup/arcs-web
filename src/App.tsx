@@ -1,4 +1,4 @@
-import { Tldraw } from "tldraw";
+import { Tldraw, type TLOnMountHandler } from "tldraw";
 import { useSync } from "@tldraw/sync";
 import "tldraw/tldraw.css";
 import { multiplayerAssetStore } from "./multiplayerAssetStore";
@@ -11,9 +11,13 @@ export default function App() {
     assets: multiplayerAssetStore,
   });
 
+  const onMount: TLOnMountHandler = (editor) => {
+    editor.user.updateUserPreferences({ colorScheme: "dark" });
+  };
+
   return (
     <div style={{ position: "fixed", inset: 0 }}>
-      <Tldraw store={store} />
+      <Tldraw store={store} onMount={onMount} />
     </div>
   );
 }
