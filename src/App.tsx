@@ -33,7 +33,7 @@ export default function App() {
 
   const onMount = useCallback<TLOnMountHandler>((editor) => {
     editor.user.updateUserPreferences({ colorScheme: "dark" });
-    setup(editor);
+    if (window.location.pathname === "/new") setup(editor);
   }, []);
 
   return (
