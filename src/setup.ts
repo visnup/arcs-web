@@ -27,11 +27,17 @@ export function setup(editor: Editor) {
     })),
   );
 
-  // editor.createShape({
-  //   id: createShapeId("ship"),
-  //   type: "ship",
-  //   props: { slot: 0 },
-  // });
+  editor.createShapes(
+    [0, 1, 2, 3].flatMap((slot) =>
+      [0, 1, 2.5, 4, 5].map((i) => ({
+        id: createShapeId(`city-${slot}-${i}`),
+        type: "city",
+        props: { slot },
+        x: positions[slot].x + w / 3.6 + (i * w) / 8.58,
+        y: positions[slot].y + h / 8.7,
+      })),
+    ),
+  );
 
   editor.zoomToFit();
 }

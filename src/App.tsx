@@ -7,11 +7,13 @@ import { MapShapeUtil } from "./shapes/map";
 import { BoardShapeUtil } from "./shapes/player/board";
 import { setup } from "./setup";
 import { ShipShapeUtil } from "./shapes/player/ship";
+import { CityShapeUtil } from "./shapes/player/city";
 
 const WORKER_URL = process.env.TLDRAW_WORKER_URL;
 
 const shapeUtils = [
   BoardShapeUtil,
+  CityShapeUtil,
   MapShapeUtil,
   ShipShapeUtil,
   ...defaultShapeUtils,
