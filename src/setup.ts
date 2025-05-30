@@ -65,6 +65,18 @@ export function setup(editor: Editor) {
       })),
     ),
   );
+  // Agents
+  editor.createShapes(
+    slots.flatMap((slot) =>
+      d3.range(0, 10).map((i) => ({
+        id: createShapeId(`agent-${slot}-${i}`),
+        type: "agent",
+        props: { slot },
+        x: positions[slot].x + w + 5 * gap + Math.random() * 5,
+        y: positions[slot].y + 2 * gap + Math.random() * 5,
+      })),
+    ),
+  );
 
   editor.zoomToFit();
 }

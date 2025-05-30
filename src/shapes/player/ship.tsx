@@ -2,7 +2,7 @@ import { BaseBoxShapeUtil, type TLBaseShape } from "tldraw";
 import { colors } from "./colors";
 
 const aspect = 314 / 125;
-export const w = 50;
+export const w = 60;
 export const h = w / aspect;
 
 type ShipShape = TLBaseShape<"ship", { w: number; h: number; slot: number }>;
