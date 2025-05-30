@@ -15,10 +15,15 @@ export default function App() {
 
   const onMount = useCallback<TLOnMountHandler>((editor) => {
     editor.user.updateUserPreferences({ colorScheme: "dark" });
+    const viewport = editor.getViewportScreenBounds();
+    editor.setCamera({
+      x: viewport.width / 2,
+      y: viewport.height / 2,
+      z: 1,
+    });
 
     editor.createAssets([mapAsset]);
     editor.createShape(mapShape);
-    console.log(editor.store.allRecords());
   }, []);
 
   return (

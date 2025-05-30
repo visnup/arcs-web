@@ -24,6 +24,8 @@ const shapeId = createShapeId("map");
 export const shape = {
   id: shapeId,
   type: "image",
+  x: -w / 2,
+  y: -h / 2,
   props: {
     assetId,
     w,
