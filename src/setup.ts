@@ -48,8 +48,8 @@ export function setup(editor: Editor) {
         id: createShapeId(`starport-${slot}-${i}`),
         type: "starport",
         props: { slot },
-        x: positions[slot].x + w + gap + Math.random() * 5,
-        y: positions[slot].y + h - 3 * gap + Math.random() * 5,
+        x: positions[slot].x + w + gap + 10 + Math.random() * 5,
+        y: positions[slot].y + h / 8.8 + Math.random() * 5,
       })),
     ),
   );
@@ -61,7 +61,7 @@ export function setup(editor: Editor) {
         type: "ship",
         props: { slot },
         x: positions[slot].x + w + gap + Math.random() * 5,
-        y: positions[slot].y + 2 * gap + Math.random() * 5,
+        y: positions[slot].y + 3.5 * gap + Math.random() * 5,
       })),
     ),
   );
@@ -72,8 +72,8 @@ export function setup(editor: Editor) {
         id: createShapeId(`agent-${slot}-${i}`),
         type: "agent",
         props: { slot },
-        x: positions[slot].x + w + 5 * gap + Math.random() * 5,
-        y: positions[slot].y + 2 * gap + Math.random() * 5,
+        x: positions[slot].x + w + gap + 20 + Math.random() * 5,
+        y: positions[slot].y + 6 * gap + Math.random() * 5,
       })),
     ),
   );
