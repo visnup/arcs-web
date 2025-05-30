@@ -1,34 +1,31 @@
-import { Tldraw, type TLOnMountHandler } from "tldraw";
+import { defaultShapeUtils, Tldraw, type TLOnMountHandler } from "tldraw";
 import { useSync } from "@tldraw/sync";
 import "tldraw/tldraw.css";
 import { multiplayerAssetStore } from "./multiplayerAssetStore";
 import { useCallback } from "react";
-import { asset as mapAsset, shape as mapShape } from "./shapes/map";
+import { MapShapeUtil } from "./shapes/map";
+import { BoardShapeUtil } from "./shapes/player/board";
+import { setup } from "./setup";
 
 const WORKER_URL = process.env.TLDRAW_WORKER_URL;
+
+const shapeUtils = [BoardShapeUtil, MapShapeUtil, ...defaultShapeUtils];
 
 export default function App() {
   const store = useSync({
     uri: `${WORKER_URL}/connect/1`,
     assets: multiplayerAssetStore,
+    shapeUtils,
   });
 
   const onMount = useCallback<TLOnMountHandler>((editor) => {
     editor.user.updateUserPreferences({ colorScheme: "dark" });
-    const viewport = editor.getViewportScreenBounds();
-    editor.setCamera({
-      x: viewport.width / 2,
-      y: viewport.height / 2,
-      z: 1,
-    });
-
-    editor.createAssets([mapAsset]);
-    editor.createShape(mapShape);
+    setup(editor);
   }, []);
 
   return (
     <div style={{ position: "fixed", inset: 0 }}>
-      <Tldraw store={store} onMount={onMount} />
+      <Tldraw store={store} shapeUtils={shapeUtils} onMount={onMount} />
     </div>
   );
 }
