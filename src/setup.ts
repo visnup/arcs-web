@@ -93,6 +93,4 @@ export function setup(editor: Editor) {
       })),
     ),
   );
-
-  editor.zoomToFit();
 }
