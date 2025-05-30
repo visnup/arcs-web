@@ -1,5 +1,6 @@
 import { createShapeId, Editor } from "tldraw";
 import { w, h } from "./shapes/player/board";
+import * as d3 from "d3-array";
 
 export function setup(editor: Editor) {
   // Map
@@ -43,12 +44,24 @@ export function setup(editor: Editor) {
   // Starports
   editor.createShapes(
     slots.flatMap((slot) =>
-      [0, 1, 2.5, 4, 5].map((i) => ({
+      d3.range(0, 5).map((i) => ({
         id: createShapeId(`starport-${slot}-${i}`),
         type: "starport",
         props: { slot },
-        x: positions[slot].x + w + gap + Math.random() * 10,
-        y: positions[slot].y + h - 2 * gap + Math.random() * 10,
+        x: positions[slot].x + w + gap + Math.random() * 5,
+        y: positions[slot].y + h - 3 * gap + Math.random() * 5,
+      })),
+    ),
+  );
+  // Ships
+  editor.createShapes(
+    slots.flatMap((slot) =>
+      d3.range(0, 15).map((i) => ({
+        id: createShapeId(`ship-${slot}-${i}`),
+        type: "ship",
+        props: { slot },
+        x: positions[slot].x + w + gap + Math.random() * 5,
+        y: positions[slot].y + 2 * gap + Math.random() * 5,
       })),
     ),
   );
