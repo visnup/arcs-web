@@ -88,7 +88,7 @@ export function setup(editor: Editor) {
         id: createShapeId(`resource-${kind}-${j}`),
         type: "resource",
         props: { kind },
-        x: -100 + jitter(),
+        x: -120 + jitter(),
         y: bounds.h / 2 - i * 60 + 40 + jitter(),
       })),
     ),
