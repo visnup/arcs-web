@@ -27,5 +27,11 @@ export function setup(editor: Editor) {
     })),
   );
 
+  // editor.createShape({
+  //   id: createShapeId("ship"),
+  //   type: "ship",
+  //   props: { slot: 0 },
+  // });
+
   editor.zoomToFit();
 }

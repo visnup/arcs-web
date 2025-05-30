@@ -1,7 +1,7 @@
 import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
 import src from "./board.png";
+import { colors } from "./colors";
 
-const colors = ["#FFB700", "#0095A9", "#E1533D", "#D7D2CB", "#912AAD"];
 const aspect = 2579 / 1033;
 export const w = 400;
 export const h = w / aspect;

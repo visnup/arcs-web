@@ -6,10 +6,16 @@ import { useCallback } from "react";
 import { MapShapeUtil } from "./shapes/map";
 import { BoardShapeUtil } from "./shapes/player/board";
 import { setup } from "./setup";
+import { ShipShapeUtil } from "./shapes/player/ship";
 
 const WORKER_URL = process.env.TLDRAW_WORKER_URL;
 
-const shapeUtils = [BoardShapeUtil, MapShapeUtil, ...defaultShapeUtils];
+const shapeUtils = [
+  BoardShapeUtil,
+  MapShapeUtil,
+  ShipShapeUtil,
+  ...defaultShapeUtils,
+];
 
 export default function App() {
   const store = useSync({
