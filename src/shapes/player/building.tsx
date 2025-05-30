@@ -31,7 +31,7 @@ class BuildingShapeUtil extends BaseBoxShapeUtil<BuildingShape> {
         : shape.props.fresh
           ? starport
           : starportDamaged;
-    const offset = (shape.props.slot / 4) * 100;
+    const offset = shape.props.slot * 25;
     return (
       <div
         id={shape.id}

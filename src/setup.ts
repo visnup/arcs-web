@@ -1,6 +1,9 @@
 import { createShapeId, Editor } from "tldraw";
 import { w, h } from "./shapes/player/board";
 import * as d3 from "d3-array";
+import { resources } from "./shapes/resource";
+
+const jitter = () => Math.random() * 5;
 
 export function setup(editor: Editor) {
   // Map
@@ -48,8 +51,8 @@ export function setup(editor: Editor) {
         id: createShapeId(`starport-${slot}-${i}`),
         type: "starport",
         props: { slot },
-        x: positions[slot].x + w + gap + 10 + Math.random() * 5,
-        y: positions[slot].y + h / 8.8 + Math.random() * 5,
+        x: positions[slot].x + w + gap + 10 + jitter(),
+        y: positions[slot].y + h / 8.8 + jitter(),
       })),
     ),
   );
@@ -60,8 +63,8 @@ export function setup(editor: Editor) {
         id: createShapeId(`ship-${slot}-${i}`),
         type: "ship",
         props: { slot },
-        x: positions[slot].x + w + gap + Math.random() * 5,
-        y: positions[slot].y + 3.5 * gap + Math.random() * 5,
+        x: positions[slot].x + w + gap + jitter(),
+        y: positions[slot].y + 3.5 * gap + jitter(),
       })),
     ),
   );
@@ -72,8 +75,21 @@ export function setup(editor: Editor) {
         id: createShapeId(`agent-${slot}-${i}`),
         type: "agent",
         props: { slot },
-        x: positions[slot].x + w + gap + 20 + Math.random() * 5,
-        y: positions[slot].y + 6 * gap + Math.random() * 5,
+        x: positions[slot].x + w + gap + 20 + jitter(),
+        y: positions[slot].y + 6 * gap + jitter(),
+      })),
+    ),
+  );
+
+  // Resources
+  editor.createShapes(
+    resources.flatMap((kind, i) =>
+      d3.range(0, 5).map((j) => ({
+        id: createShapeId(`resource-${kind}-${j}`),
+        type: "resource",
+        props: { kind },
+        x: -100 + jitter(),
+        y: bounds.h / 2 - i * 60 + 40 + jitter(),
       })),
     ),
   );
