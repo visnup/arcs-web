@@ -1,4 +1,4 @@
-import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
+import { BaseBoxShapeUtil, type TLBaseShape } from "tldraw";
 import city from "./city.jpg";
 import cityDamaged from "./city-dmg.jpg";
 import starport from "./starport.jpg";
@@ -33,20 +33,19 @@ class BuildingShapeUtil extends BaseBoxShapeUtil<BuildingShape> {
           : starportDamaged;
     const offset = (shape.props.slot / 4) * 100;
     return (
-      <HTMLContainer id={shape.id} style={{ overflow: "hidden" }}>
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            backgroundImage: `url(${url})`,
-            backgroundSize: "auto 100%",
-            backgroundPosition: `${offset}% 0`,
-            maskImage: `url(${mask})`,
-            maskSize: "contain",
-            maskRepeat: "no-repeat",
-          }}
-        />
-      </HTMLContainer>
+      <div
+        id={shape.id}
+        style={{
+          width: "100%",
+          height: "100%",
+          backgroundImage: `url(${url})`,
+          backgroundSize: "auto 100%",
+          backgroundPosition: `${offset}% 0`,
+          maskImage: `url(${mask})`,
+          maskSize: "contain",
+          maskRepeat: "no-repeat",
+        }}
+      />
     );
   }
 
