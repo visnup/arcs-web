@@ -1,15 +1,17 @@
 import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
-import url from "./city.jpg";
+import city from "./city.jpg";
+import starport from "./starport.jpg";
 import mask from "./building-mask.png";
 
 const aspect = 298 / 266;
 export const w = 40;
 export const h = w / aspect;
 
-type CityShape = TLBaseShape<"city", { w: number; h: number; slot: number }>;
-export class CityShapeUtil extends BaseBoxShapeUtil<CityShape> {
-  static override type = "city" as const;
-
+type BuildingShape = TLBaseShape<
+  "city" | "starport",
+  { w: number; h: number; slot: number }
+>;
+class BuildingShapeUtil extends BaseBoxShapeUtil<BuildingShape> {
   getDefaultProps() {
     return { w, h, slot: 0 };
   }
@@ -18,7 +20,8 @@ export class CityShapeUtil extends BaseBoxShapeUtil<CityShape> {
     return false;
   }
 
-  component(shape: CityShape) {
+  component(shape: BuildingShape) {
+    const url = shape.type === "city" ? city : starport;
     const offset = (shape.props.slot / 4) * 100;
     return (
       <HTMLContainer id={shape.id} style={{ overflow: "hidden" }}>
@@ -38,7 +41,14 @@ export class CityShapeUtil extends BaseBoxShapeUtil<CityShape> {
     );
   }
 
-  indicator(shape: CityShape) {
+  indicator(shape: BuildingShape) {
     return this.editor.getShapeUtil("image").indicator(shape);
   }
+}
+
+export class CityShapeUtil extends BuildingShapeUtil {
+  static override type = "city" as const;
+}
+export class StarportShapeUtil extends BuildingShapeUtil {
+  static override type = "starport" as const;
 }

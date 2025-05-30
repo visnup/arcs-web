@@ -16,8 +16,9 @@ export function setup(editor: Editor) {
     { x: bounds.minX, y: bounds.minY - h - gap }, // top-left
     { x: bounds.maxX - w, y: bounds.minY - h - gap }, // top-right
   ];
+  const slots = [0, 1, 2, 3];
   editor.createShapes(
-    [0, 1, 2, 3].map((slot) => ({
+    slots.map((slot) => ({
       id: createShapeId(`board-${slot}`),
       type: "board",
       x: positions[slot].x,
@@ -27,14 +28,27 @@ export function setup(editor: Editor) {
     })),
   );
 
+  // Cities
   editor.createShapes(
-    [0, 1, 2, 3].flatMap((slot) =>
+    slots.flatMap((slot) =>
       [0, 1, 2.5, 4, 5].map((i) => ({
         id: createShapeId(`city-${slot}-${i}`),
         type: "city",
         props: { slot },
         x: positions[slot].x + w / 3.6 + (i * w) / 8.58,
-        y: positions[slot].y + h / 8.7,
+        y: positions[slot].y + h / 8.8,
+      })),
+    ),
+  );
+  // Starports
+  editor.createShapes(
+    slots.flatMap((slot) =>
+      [0, 1, 2.5, 4, 5].map((i) => ({
+        id: createShapeId(`starport-${slot}-${i}`),
+        type: "starport",
+        props: { slot },
+        x: positions[slot].x + w + gap + Math.random() * 10,
+        y: positions[slot].y + h - 2 * gap + Math.random() * 10,
       })),
     ),
   );
