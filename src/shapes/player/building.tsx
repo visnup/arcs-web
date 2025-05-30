@@ -1,6 +1,8 @@
 import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
 import city from "./city.jpg";
+import cityDamaged from "./city-dmg.jpg";
 import starport from "./starport.jpg";
+import starportDamaged from "./starport-dmg.jpg";
 import mask from "./building-mask.png";
 
 const aspect = 298 / 266;
@@ -9,11 +11,11 @@ export const h = w / aspect;
 
 type BuildingShape = TLBaseShape<
   "city" | "starport",
-  { w: number; h: number; slot: number }
+  { w: number; h: number; slot: number; fresh: boolean }
 >;
 class BuildingShapeUtil extends BaseBoxShapeUtil<BuildingShape> {
   getDefaultProps() {
-    return { w, h, slot: 0 };
+    return { w, h, slot: 0, fresh: true };
   }
 
   canResize() {
@@ -21,7 +23,14 @@ class BuildingShapeUtil extends BaseBoxShapeUtil<BuildingShape> {
   }
 
   component(shape: BuildingShape) {
-    const url = shape.type === "city" ? city : starport;
+    const url =
+      shape.type === "city"
+        ? shape.props.fresh
+          ? city
+          : cityDamaged
+        : shape.props.fresh
+          ? starport
+          : starportDamaged;
     const offset = (shape.props.slot / 4) * 100;
     return (
       <HTMLContainer id={shape.id} style={{ overflow: "hidden" }}>
