@@ -50,7 +50,20 @@ class BuildingShapeUtil extends BaseBoxShapeUtil<BuildingShape> {
   }
 
   indicator(shape: BuildingShape) {
-    return this.editor.getShapeUtil("image").indicator(shape);
+    const { w, h } = shape.props;
+    return (
+      <path
+        d={`
+          M ${w / 2 + 3.5} 2
+          L ${w - 1} ${h - 7}
+          Q ${w + 2} ${h - 1} ${w - 4} ${h}
+          L 4 ${h}
+          Q -2 ${h - 1} 1 ${h - 7}
+          L ${w / 2 - 3.5} 2
+          Q ${w / 2} -2 ${w / 2 + 3.5} 2
+        `}
+      />
+    );
   }
 }
 
