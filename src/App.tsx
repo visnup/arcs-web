@@ -1,4 +1,9 @@
-import { defaultShapeUtils, Tldraw, type TLOnMountHandler } from "tldraw";
+import {
+  defaultShapeUtils,
+  Tldraw,
+  type TLOnMountHandler,
+  type TLEditorComponents,
+} from "tldraw";
 import { useSync } from "@tldraw/sync";
 import "tldraw/tldraw.css";
 import { multiplayerAssetStore } from "./multiplayerAssetStore";
@@ -8,6 +13,11 @@ import { customShapeUtils } from "./shapes";
 
 const WORKER_URL = process.env.TLDRAW_WORKER_URL;
 const shapeUtils = [...defaultShapeUtils, ...customShapeUtils];
+
+const components: TLEditorComponents = {
+  SelectionBackground: null,
+  SelectionForeground: null,
+};
 
 export default function App() {
   const store = useSync({
@@ -24,7 +34,12 @@ export default function App() {
 
   return (
     <div style={{ position: "fixed", inset: 0 }}>
-      <Tldraw store={store} shapeUtils={shapeUtils} onMount={onMount} />
+      <Tldraw
+        store={store}
+        shapeUtils={shapeUtils}
+        onMount={onMount}
+        components={components}
+      />
     </div>
   );
 }
