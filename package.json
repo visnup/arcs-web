@@ -19,6 +19,7 @@
     "cloudflare-workers-unfurl": "^0.0.7",
     "d3-array": "^3.2.4",
     "itty-router": "^5.0.18",
+    "lodash.throttle": "^4.1.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tldraw": "^3.13.1"
@@ -27,6 +28,7 @@
     "@cloudflare/workers-types": "^4.20250529.0",
     "@eslint/js": "^9.25.0",
     "@types/d3-array": "^3.2.1",
+    "@types/lodash.throttle": "^4.1.9",
     "@types/node": "^22.15.24",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
