@@ -3,26 +3,11 @@ import { useSync } from "@tldraw/sync";
 import "tldraw/tldraw.css";
 import { multiplayerAssetStore } from "./multiplayerAssetStore";
 import { useCallback } from "react";
-import { MapShapeUtil } from "./shapes/map";
-import { BoardShapeUtil } from "./shapes/player/board";
 import { setup } from "./setup";
-import { ShipShapeUtil } from "./shapes/player/ship";
-import { CityShapeUtil, StarportShapeUtil } from "./shapes/player/building";
-import { AgentShapeUtil } from "./shapes/player/agent";
-import { ResourceShapeUtil } from "./shapes/resource";
+import { customShapeUtils } from "./shapes";
 
 const WORKER_URL = process.env.TLDRAW_WORKER_URL;
-
-const shapeUtils = [
-  AgentShapeUtil,
-  BoardShapeUtil,
-  CityShapeUtil,
-  MapShapeUtil,
-  ResourceShapeUtil,
-  ShipShapeUtil,
-  StarportShapeUtil,
-  ...defaultShapeUtils,
-];
+const shapeUtils = [...defaultShapeUtils, ...customShapeUtils];
 
 export default function App() {
   const store = useSync({
