@@ -10,16 +10,19 @@ import throttle from "lodash.throttle";
 import { Environment } from "./types";
 
 // add custom shapes and bindings here if needed:
+const customShapes = [
+  "agent",
+  "board",
+  "city",
+  "map",
+  "resource",
+  "ship",
+  "starport",
+];
 const schema = createTLSchema({
   shapes: {
     ...defaultShapeSchemas,
-    agent: {},
-    board: {},
-    city: {},
-    map: {},
-    resource: {},
-    ship: {},
-    starport: {},
+    ...Object.fromEntries(customShapes.map((type) => [type, {}])),
   },
   // bindings: { ...defaultBindingSchemas },
 });
