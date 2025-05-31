@@ -4,31 +4,41 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently --kill-others --names client,worker --prefix-colors blue,red yarn:dev:client yarn:dev:worker",
+    "dev:client": "vite",
+    "dev:worker": "wrangler dev",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@cloudflare/types": "^7.0.0",
     "@tldraw/sync": "^3.13.1",
+    "@tldraw/sync-core": "^3.13.1",
+    "@tldraw/tlschema": "^3.13.1",
+    "cloudflare-workers-unfurl": "^0.0.7",
     "d3-array": "^3.2.4",
+    "itty-router": "^5.0.18",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tldraw": "^3.13.1"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250529.0",
     "@eslint/js": "^9.25.0",
     "@types/d3-array": "^3.2.1",
     "@types/node": "^22.15.24",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
+    "concurrently": "^9.1.2",
     "eslint": "^9.25.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "wrangler": "^4.18.0"
   }
 }
