@@ -2,7 +2,7 @@ import {
   defaultShapeUtils,
   Tldraw,
   type TLOnMountHandler,
-  type TLEditorComponents,
+  type TLComponents,
 } from "tldraw";
 import { useSync } from "@tldraw/sync";
 import "tldraw/tldraw.css";
@@ -14,9 +14,11 @@ import { customShapeUtils } from "./shapes";
 const WORKER_URL = process.env.TLDRAW_WORKER_URL;
 const shapeUtils = [...defaultShapeUtils, ...customShapeUtils];
 
-const components: TLEditorComponents = {
+const components: TLComponents = {
   SelectionBackground: null,
   SelectionForeground: null,
+  StylePanel: null,
+  Toolbar: null,
 };
 
 export default function App() {
@@ -37,8 +39,8 @@ export default function App() {
       <Tldraw
         store={store}
         shapeUtils={shapeUtils}
-        onMount={onMount}
         components={components}
+        onMount={onMount}
       />
     </div>
   );
