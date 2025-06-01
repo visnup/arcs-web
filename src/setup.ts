@@ -27,6 +27,13 @@ export function setup(editor: Editor) {
     { x: bounds.minX, y: bounds.minY - h - gap }, // top-left
     { x: bounds.maxX - w, y: bounds.minY - h - gap }, // top-right
   ];
+  // Initiative
+  editor.createShape({
+    id: createShapeId("initiative"),
+    type: "initiative",
+    x: positions[0].x - 50,
+    y: positions[0].y,
+  });
   const slots = [0, 1, 2, 3];
   editor.createShapes(
     slots.map((slot) => ({

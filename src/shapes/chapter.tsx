@@ -18,7 +18,7 @@ export class ChapterMarkerShapeUtil extends BaseBoxShapeUtil<ChapterMarkerShape>
     const r = shape.props.w / 2;
     return (
       <svg id={shape.id} xmlns="http://www.w3.org/2000/svg">
-        <circle r={r} cx={r} cy={r} fill="white" />
+        <circle r={r} cx={r} cy={r} fill="#a5a7aa" />
       </svg>
     );
   }

@@ -15,6 +15,7 @@ const customShapes = [
   "board",
   "chapter",
   "city",
+  "initiative",
   "map",
   "power",
   "resource",
