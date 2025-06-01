@@ -35,7 +35,7 @@ export class AgentShapeUtil extends BaseBoxShapeUtil<AgentShape> {
         viewBox="0 0 102 171"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <Path fill={color} stroke="hsl(0, 0%, 0%, 0.5)" />
+        <Path fill={color} stroke="hsl(0, 0%, 0%, 0.2)" />
       </svg>
     );
   }
