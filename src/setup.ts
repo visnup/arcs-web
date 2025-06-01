@@ -11,6 +11,13 @@ export function setup(editor: Editor) {
   editor.createShape({ id: mapId, type: "map", isLocked: true });
   const map = editor.getShape(mapId)!;
   const { bounds } = editor.getShapeGeometry(map);
+  // Chapter
+  editor.createShape({
+    id: createShapeId("chapter"),
+    type: "chapter",
+    x: bounds.maxX - 161,
+    y: bounds.maxY - 66,
+  });
 
   // Player boards
   const gap = 20;

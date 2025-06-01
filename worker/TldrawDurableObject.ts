@@ -13,6 +13,7 @@ import { Environment } from "./types";
 const customShapes = [
   "agent",
   "board",
+  "chapter",
   "city",
   "map",
   "power",
