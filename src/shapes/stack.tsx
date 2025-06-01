@@ -33,8 +33,10 @@ export class StackBindingUtil extends BindingUtil<StackBinding> {
     return {};
   }
 
-  onAfterCreate({ binding: { toId } }: BindingOnCreateOptions<StackBinding>) {
-    console.log("binding create", toId);
+  onAfterCreate({
+    binding: { fromId, toId },
+  }: BindingOnCreateOptions<StackBinding>) {
+    console.log("binding create", fromId, toId);
     const stack = this.editor.getShape<StackShape>(toId);
     if (!stack) return;
     const bounds = this.editor
@@ -50,6 +52,7 @@ export class StackBindingUtil extends BindingUtil<StackBinding> {
       props: { count: bounds.length },
     });
   }
+
   onAfterDelete({
     binding: { fromId, toId },
   }: BindingOnDeleteOptions<StackBinding>) {

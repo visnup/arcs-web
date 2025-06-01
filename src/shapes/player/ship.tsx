@@ -54,6 +54,7 @@ export class ShipShapeUtil extends BaseBoxShapeUtil<ShipShape> {
   }
 
   onTranslateEnd(_initial: ShipShape, current: ShipShape) {
+    if (this.editor.getBindingsFromShape(current, "stack").length) return;
     const shapes = this.editor
       .getShapesAtPoint(current, { hitInside: true, margin: 10 })
       .filter((s) => s !== current && s.type === current.type);
@@ -79,7 +80,5 @@ export class ShipShapeUtil extends BaseBoxShapeUtil<ShipShape> {
           toId: stack,
         });
     }
-
-    console.log("end", current.id, stacks);
   }
 }

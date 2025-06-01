@@ -36,13 +36,6 @@ export default function App() {
     editor.user.updateUserPreferences({ colorScheme: "dark" });
     editor.zoomToFit();
 
-    console.log(
-      editor.store
-        .allRecords()
-        .map((r) => r.id)
-        .filter((id) => id.startsWith("binding:")),
-    );
-
     const cleanups: (() => void)[] = [];
 
     // Bring selected shapes to front
