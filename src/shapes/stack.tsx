@@ -37,8 +37,9 @@ export abstract class StackableShapeUtil<
 
   onTranslateEnd(_initial: T, shape: T) {
     if (this.editor.getBindingsFromShape(shape, "stack").length) return;
+    const { center } = this.editor.getShapePageGeometry(shape);
     const shapes = this.editor
-      .getShapesAtPoint(shape, { hitInside: true, margin: 10 })
+      .getShapesAtPoint(center, { hitInside: true })
       .filter((s) => s !== shape && s.type === shape.type);
     if (shapes.length === 0) return;
     const stacks = new Set(
@@ -73,44 +74,40 @@ export class StackBindingUtil extends BindingUtil<StackBinding> {
     return {};
   }
 
-  onAfterCreate({
-    binding: { fromId, toId },
-  }: BindingOnCreateOptions<StackBinding>) {
-    console.log("create", fromId, toId);
-    const stack = this.editor.getShape<StackShape>(toId);
-    if (!stack) return;
+  getFromBounds(binding: StackBinding) {
     const bounds = this.editor
-      .getBindingsToShape(stack, "stack")
+      .getBindingsToShape(binding.toId, "stack")
       .map((b) => this.editor.getShapePageBounds(b.fromId)!);
-    const { maxX, minY } = bounds.reduce((u, bounds) => u.union(bounds));
-    console.log(maxX, minY, bounds);
+    return {
+      bounds: bounds.reduce((u, bounds) => u.union(bounds)),
+      length: bounds.length,
+    };
+  }
+
+  onAfterCreate({ binding }: BindingOnCreateOptions<StackBinding>) {
+    console.log("create", binding);
+    const { bounds, length } = this.getFromBounds(binding);
     this.editor.updateShape({
-      id: toId,
+      id: binding.toId,
       type: "stack",
-      x: maxX + 5,
-      y: minY + 10,
-      props: { count: bounds.length },
+      x: bounds.maxX + 5,
+      y: bounds.midY - 10,
+      props: { count: length },
     });
   }
 
-  onAfterDelete({
-    binding: { fromId, toId },
-  }: BindingOnDeleteOptions<StackBinding>) {
-    console.log("delete", fromId, toId);
-    const stack = this.editor.getShape<StackShape>(toId);
-    if (!stack || stack.props.count <= 2) return this.editor.deleteShape(toId);
-    const bounds = this.editor
-      .getBindingsToShape(stack, "stack")
-      .map((b) => this.editor.getShapePageBounds(b.fromId)!);
-    if (bounds.length === 0) return this.editor.deleteShape(toId);
-    const { maxX, minY } = bounds.reduce((u, bounds) => u.union(bounds));
-    console.log(maxX, minY, bounds);
+  onAfterDelete({ binding }: BindingOnDeleteOptions<StackBinding>) {
+    console.log("delete", binding);
+    const stack = this.editor.getShape<StackShape>(binding.toId);
+    if (!stack || stack.props.count <= 2)
+      return this.editor.deleteShape(binding.toId);
+    const { bounds, length } = this.getFromBounds(binding);
     this.editor.updateShape({
-      id: toId,
+      id: binding.toId,
       type: "stack",
-      x: maxX + 5,
-      y: minY + 10,
-      props: { count: bounds.length },
+      x: bounds.maxX + 5,
+      y: bounds.midY - 10,
+      props: { count: length },
     });
   }
 }
