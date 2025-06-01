@@ -75,9 +75,12 @@ export class StackBindingUtil extends BindingUtil<StackBinding> {
   }
 
   getFromBounds(binding: StackBinding) {
-    const bounds = this.editor
-      .getBindingsToShape(binding.toId, "stack")
-      .map((b) => this.editor.getShapePageBounds(b.fromId)!);
+    const bounds = this.editor.getBindingsToShape(binding.toId, "stack").map(
+      (b) =>
+        this.editor.getShapePageGeometry(b.fromId, {
+          context: String(Math.random()), // ignore cache
+        }).bounds!,
+    );
     return {
       bounds: bounds.reduce((u, bounds) => u.union(bounds)),
       length: bounds.length,
@@ -85,7 +88,6 @@ export class StackBindingUtil extends BindingUtil<StackBinding> {
   }
 
   onAfterCreate({ binding }: BindingOnCreateOptions<StackBinding>) {
-    console.log("create", binding);
     const { bounds, length } = this.getFromBounds(binding);
     this.editor.updateShape({
       id: binding.toId,
@@ -97,7 +99,6 @@ export class StackBindingUtil extends BindingUtil<StackBinding> {
   }
 
   onAfterDelete({ binding }: BindingOnDeleteOptions<StackBinding>) {
-    console.log("delete", binding);
     const stack = this.editor.getShape<StackShape>(binding.toId);
     if (!stack || stack.props.count <= 2)
       return this.editor.deleteShape(binding.toId);
