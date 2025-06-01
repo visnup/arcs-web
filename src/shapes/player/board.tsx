@@ -17,7 +17,10 @@ export class BoardShapeUtil extends BaseBoxShapeUtil<BoardShape> {
   component(shape: BoardShape) {
     const backgroundColor = colors[shape.props.slot];
     return (
-      <HTMLContainer id={shape.id} style={{ backgroundColor }}>
+      <HTMLContainer
+        id={shape.id}
+        style={{ backgroundColor, overflow: "hidden", borderRadius: 5 }}
+      >
         <img className="tl-image" draggable="false" src={src} />
       </HTMLContainer>
     );
