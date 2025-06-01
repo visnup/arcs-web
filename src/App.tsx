@@ -29,7 +29,7 @@ export default function App() {
   });
 
   const onMount = useCallback<TLOnMountHandler>((editor) => {
-    if (window.location.pathname === "/new") setup(editor);
+    if (window.location.search === "?new") setup(editor);
     editor.user.updateUserPreferences({ colorScheme: "dark" });
     editor.zoomToFit();
 
