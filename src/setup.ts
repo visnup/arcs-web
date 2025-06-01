@@ -80,6 +80,16 @@ export function setup(editor: Editor) {
       })),
     ),
   );
+  // Power markers
+  editor.createShapes(
+    slots.map((slot, i) => ({
+      id: createShapeId(`power-${slot}-1`),
+      type: "power",
+      props: { slot },
+      x: 15 + (i % 2) * 15,
+      y: bounds.maxY - 15 - Math.floor(i / 2) * 15,
+    })),
+  );
 
   // Resources
   editor.createShapes(

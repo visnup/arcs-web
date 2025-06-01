@@ -15,6 +15,7 @@ const customShapes = [
   "board",
   "city",
   "map",
+  "power",
   "resource",
   "ship",
   "starport",
