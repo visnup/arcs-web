@@ -7,6 +7,7 @@ import { PowerMarkerShapeUtil } from "./player/power";
 import { ResourceShapeUtil } from "./resource";
 import { ChapterMarkerShapeUtil } from "./chapter";
 import { InitiativeMarkerShapeUtil } from "./initiative";
+import { StackBindingUtil, StackShapeUtil } from "./stack";
 
 export const customShapeUtils = [
   AgentShapeUtil,
@@ -18,5 +19,8 @@ export const customShapeUtils = [
   PowerMarkerShapeUtil,
   ResourceShapeUtil,
   ShipShapeUtil,
+  StackShapeUtil,
   StarportShapeUtil,
 ];
+
+export const customBindingUtils = [StackBindingUtil];

@@ -2,7 +2,7 @@ import { RoomSnapshot, TLSocketRoom } from "@tldraw/sync-core";
 import {
   TLRecord,
   createTLSchema,
-  // defaultBindingSchemas,
+  defaultBindingSchemas,
   defaultShapeSchemas,
 } from "@tldraw/tlschema";
 import { AutoRouter, IRequest, error } from "itty-router";
@@ -20,14 +20,19 @@ const customShapes = [
   "power",
   "resource",
   "ship",
+  "stack",
   "starport",
 ];
+const customBindings = ["stack"];
 const schema = createTLSchema({
   shapes: {
     ...defaultShapeSchemas,
     ...Object.fromEntries(customShapes.map((type) => [type, {}])),
   },
-  // bindings: { ...defaultBindingSchemas },
+  bindings: {
+    ...defaultBindingSchemas,
+    ...Object.fromEntries(customBindings.map((type) => [type, {}])),
+  },
 });
 
 // each whiteboard room is hosted in a DurableObject:
