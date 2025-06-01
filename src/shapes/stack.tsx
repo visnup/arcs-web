@@ -1,10 +1,12 @@
 import {
   BaseBoxShapeUtil,
   BindingUtil,
+  createShapeId,
   HTMLContainer,
   type BindingOnCreateOptions,
   type BindingOnDeleteOptions,
   type TLBaseBinding,
+  type TLBaseBoxShape,
   type TLBaseShape,
 } from "tldraw";
 
@@ -25,6 +27,44 @@ export class StackShapeUtil extends BaseBoxShapeUtil<StackShape> {
   }
 }
 
+export abstract class StackableShapeUtil<
+  T extends TLBaseBoxShape,
+> extends BaseBoxShapeUtil<T> {
+  onTranslateStart(shape: T) {
+    const bindings = this.editor.getBindingsFromShape(shape, "stack");
+    this.editor.deleteBindings(bindings);
+  }
+
+  onTranslateEnd(_initial: T, shape: T) {
+    if (this.editor.getBindingsFromShape(shape, "stack").length) return;
+    const shapes = this.editor
+      .getShapesAtPoint(shape, { hitInside: true, margin: 10 })
+      .filter((s) => s !== shape && s.type === shape.type);
+    if (shapes.length === 0) return;
+    const stacks = new Set(
+      shapes
+        .flatMap((s) => this.editor.getBindingsFromShape(s, "stack"))
+        .map((b) => b.toId),
+    );
+    if (stacks.size === 0) {
+      const id = createShapeId();
+      this.editor
+        .createShape({ id, type: "stack" })
+        .createBinding({ type: "stack", fromId: shape.id, toId: id })
+        .createBindings(
+          shapes.map((s) => ({ type: "stack", fromId: s.id, toId: id })),
+        );
+    } else {
+      for (const stack of stacks)
+        this.editor.createBinding({
+          type: "stack",
+          fromId: shape.id,
+          toId: stack,
+        });
+    }
+  }
+}
+
 type StackBinding = TLBaseBinding<"stack", object>;
 export class StackBindingUtil extends BindingUtil<StackBinding> {
   static override type = "stack" as const;
@@ -36,7 +76,7 @@ export class StackBindingUtil extends BindingUtil<StackBinding> {
   onAfterCreate({
     binding: { fromId, toId },
   }: BindingOnCreateOptions<StackBinding>) {
-    console.log("binding create", fromId, toId);
+    console.log("create", fromId, toId);
     const stack = this.editor.getShape<StackShape>(toId);
     if (!stack) return;
     const bounds = this.editor
@@ -56,7 +96,7 @@ export class StackBindingUtil extends BindingUtil<StackBinding> {
   onAfterDelete({
     binding: { fromId, toId },
   }: BindingOnDeleteOptions<StackBinding>) {
-    console.log("binding delete", fromId, toId);
+    console.log("delete", fromId, toId);
     const stack = this.editor.getShape<StackShape>(toId);
     if (!stack || stack.props.count <= 2) return this.editor.deleteShape(toId);
     const bounds = this.editor

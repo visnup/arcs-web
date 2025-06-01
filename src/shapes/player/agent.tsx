@@ -1,5 +1,6 @@
-import { BaseBoxShapeUtil, type TLBaseShape } from "tldraw";
+import { type TLBaseShape } from "tldraw";
 import { colors } from "./colors";
+import { StackableShapeUtil } from "../stack";
 
 const aspect = 102 / 171;
 export const w = 20;
@@ -14,7 +15,7 @@ const Path = (props: React.SVGProps<SVGPathElement>) => (
 );
 
 type AgentShape = TLBaseShape<"agent", { w: number; h: number; slot: number }>;
-export class AgentShapeUtil extends BaseBoxShapeUtil<AgentShape> {
+export class AgentShapeUtil extends StackableShapeUtil<AgentShape> {
   static override type = "agent" as const;
 
   getDefaultProps() {

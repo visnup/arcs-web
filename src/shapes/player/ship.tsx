@@ -1,5 +1,6 @@
-import { BaseBoxShapeUtil, createShapeId, type TLBaseShape } from "tldraw";
+import { type TLBaseShape } from "tldraw";
 import { colors } from "./colors";
+import { StackableShapeUtil } from "../stack";
 
 const aspect = 314 / 125;
 export const w = 60;
@@ -14,7 +15,7 @@ const Path = (props: React.SVGProps<SVGPathElement>) => (
 );
 
 type ShipShape = TLBaseShape<"ship", { w: number; h: number; slot: number }>;
-export class ShipShapeUtil extends BaseBoxShapeUtil<ShipShape> {
+export class ShipShapeUtil extends StackableShapeUtil<ShipShape> {
   static override type = "ship" as const;
 
   getDefaultProps() {
@@ -46,39 +47,5 @@ export class ShipShapeUtil extends BaseBoxShapeUtil<ShipShape> {
         <Path />
       </g>
     );
-  }
-
-  onTranslateStart(shape: ShipShape) {
-    const bindings = this.editor.getBindingsFromShape(shape, "stack");
-    this.editor.deleteBindings(bindings);
-  }
-
-  onTranslateEnd(_initial: ShipShape, current: ShipShape) {
-    if (this.editor.getBindingsFromShape(current, "stack").length) return;
-    const shapes = this.editor
-      .getShapesAtPoint(current, { hitInside: true, margin: 10 })
-      .filter((s) => s !== current && s.type === current.type);
-    if (shapes.length === 0) return;
-    const stacks = new Set(
-      shapes
-        .flatMap((s) => this.editor.getBindingsFromShape(s, "stack"))
-        .map((b) => b.toId),
-    );
-    if (stacks.size === 0) {
-      const id = createShapeId();
-      this.editor
-        .createShape({ id, type: "stack" })
-        .createBinding({ type: "stack", fromId: current.id, toId: id })
-        .createBindings(
-          shapes.map((s) => ({ type: "stack", fromId: s.id, toId: id })),
-        );
-    } else {
-      for (const stack of stacks)
-        this.editor.createBinding({
-          type: "stack",
-          fromId: current.id,
-          toId: stack,
-        });
-    }
   }
 }

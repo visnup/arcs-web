@@ -1,9 +1,10 @@
-import { BaseBoxShapeUtil, type TLBaseShape } from "tldraw";
+import { type TLBaseShape } from "tldraw";
 import city from "./city.jpg";
 import cityDamaged from "./city-dmg.jpg";
 import starport from "./starport.jpg";
 import starportDamaged from "./starport-dmg.jpg";
 import mask from "./building-mask.png";
+import { StackableShapeUtil } from "../stack";
 
 const aspect = 298 / 266;
 export const w = 40;
@@ -13,7 +14,7 @@ type BuildingShape = TLBaseShape<
   "city" | "starport",
   { w: number; h: number; slot: number; fresh: boolean }
 >;
-class BuildingShapeUtil extends BaseBoxShapeUtil<BuildingShape> {
+class BuildingShapeUtil extends StackableShapeUtil<BuildingShape> {
   getDefaultProps() {
     return { w, h, slot: 0, fresh: true };
   }
