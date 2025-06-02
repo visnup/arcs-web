@@ -120,7 +120,7 @@ export function setup(editor: Editor) {
 
   // Base court
   editor.createShapes(
-    d3.shuffle(d3.range(0, 31)).map((index) => ({
+    d3.range(0, 31).map((index) => ({
       id: createShapeId(`bc-${index}`),
       type: "card",
       x: bounds.w + 132 + gap,

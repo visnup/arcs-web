@@ -11,6 +11,7 @@ import {
 import "tldraw/tldraw.css";
 import { flip } from "./actions/flip";
 import { rotate } from "./actions/rotate";
+import { shuffle } from "./actions/shuffle";
 import { multiplayerAssetStore } from "./multiplayerAssetStore";
 import { setup } from "./setup";
 import { customBindingUtils, customShapeUtils } from "./shapes";
@@ -29,7 +30,12 @@ const components: TLComponents = {
 const overrides: TLUiOverrides = {
   actions: (editor, actions) => {
     // Custom actions
-    return { ...actions, ...flip(editor), ...rotate(editor) };
+    return {
+      ...actions,
+      ...flip(editor),
+      ...rotate(editor),
+      ...shuffle(editor),
+    };
   },
   tools: (_editor, tools) => {
     // Remove tools
