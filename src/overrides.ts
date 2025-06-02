@@ -34,13 +34,13 @@ export const overrides: TLUiOverrides = {
       id: "rotate-left",
       label: "Rotate left",
       kbd: "q",
-      onSelect: rotate(-Math.PI / 2),
+      onSelect: rotate(-Math.PI / 4),
     };
     const rotateRight: TLUiActionItem = {
       id: "rotate-right",
       label: "Rotate right",
       kbd: "e",
-      onSelect: rotate(Math.PI / 2),
+      onSelect: rotate(Math.PI / 4),
     };
 
     return { ...actions, flip, rotateLeft, rotateRight };
