@@ -2,12 +2,13 @@ import type { Editor, TLUiActionsContextType } from "tldraw";
 
 export const rotate: (editor: Editor) => TLUiActionsContextType = (editor) => {
   const rotate = (angle: number) => () => {
-    editor.rotateShapesBy(
-      [...editor.getSelectedShapeIds(), editor.getHoveredShapeId()].filter(
-        (s) => s !== null,
-      ),
-      angle,
-    );
+    editor.run(() => {
+      for (const id of [
+        ...editor.getSelectedShapeIds(),
+        editor.getHoveredShapeId(),
+      ].filter((s) => s !== null))
+        editor.rotateShapesBy([id], angle);
+    });
   };
 
   return {
