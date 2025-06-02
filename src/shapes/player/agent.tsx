@@ -36,7 +36,7 @@ export class AgentShapeUtil extends StackableShapeUtil<AgentShape> {
         viewBox="0 0 102 171"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <Path fill={color} stroke="hsl(0, 0%, 0%, 0.2)" />
+        <Path fill={color} stroke="hsl(0, 0%, 0%, 0.2)" stroke-width="0.5" />
       </svg>
     );
   }

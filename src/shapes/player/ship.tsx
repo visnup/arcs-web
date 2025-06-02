@@ -36,7 +36,7 @@ export class ShipShapeUtil extends StackableShapeUtil<ShipShape> {
         viewBox="0 0 314 125"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <Path fill={color} stroke="hsl(0, 0%, 0%, 0.2)" />
+        <Path fill={color} stroke="hsl(0, 0%, 0%, 0.2)" stroke-width="0.5" />
       </svg>
     );
   }
