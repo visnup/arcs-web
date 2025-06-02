@@ -117,4 +117,15 @@ export function setup(editor: Editor) {
       })),
     ),
   );
+
+  // Base court
+  editor.createShapes(
+    d3.range(0, 31).map((index) => ({
+      id: createShapeId(`bc-${index}`),
+      type: "card",
+      x: bounds.w + gap,
+      y: 0,
+      props: { index },
+    })),
+  );
 }

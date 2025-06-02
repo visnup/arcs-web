@@ -8,10 +8,12 @@ import { ResourceShapeUtil } from "./resource";
 import { ChapterMarkerShapeUtil } from "./chapter";
 import { InitiativeMarkerShapeUtil } from "./initiative";
 import { StackBindingUtil, StackShapeUtil } from "./stack";
+import { CardShapeUtil } from "./cards/bc";
 
 export const customShapeUtils = [
   AgentShapeUtil,
   BoardShapeUtil,
+  CardShapeUtil,
   ChapterMarkerShapeUtil,
   CityShapeUtil,
   InitiativeMarkerShapeUtil,
