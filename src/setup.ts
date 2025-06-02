@@ -54,7 +54,7 @@ export function setup(editor: Editor) {
         type: "city",
         props: { slot },
         x: positions[slot].x + w / 3.6 + (i * w) / 8.58,
-        y: positions[slot].y + h / 8.8,
+        y: positions[slot].y + h / 8.9,
       })),
     ),
   );
@@ -66,7 +66,7 @@ export function setup(editor: Editor) {
         type: "starport",
         props: { slot },
         x: positions[slot].x + w + gap + 10 + jitter(),
-        y: positions[slot].y + h / 8.8 + jitter(),
+        y: positions[slot].y + h / 8.9 + jitter(),
       })),
     ),
   );
@@ -78,7 +78,7 @@ export function setup(editor: Editor) {
         type: "ship",
         props: { slot },
         x: positions[slot].x + w + gap + jitter(),
-        y: positions[slot].y + 3.5 * gap + jitter(),
+        y: positions[slot].y + 3.75 * gap + jitter(),
       })),
     ),
   );
