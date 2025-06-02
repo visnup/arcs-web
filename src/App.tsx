@@ -1,17 +1,19 @@
+import { useSync } from "@tldraw/sync";
+import { useCallback } from "react";
 import {
+  defaultBindingUtils,
   defaultShapeUtils,
   Tldraw,
-  type TLOnMountHandler,
   type TLComponents,
-  defaultBindingUtils,
+  type TLOnMountHandler,
+  type TLUiOverrides,
 } from "tldraw";
-import { useSync } from "@tldraw/sync";
 import "tldraw/tldraw.css";
+import { flip } from "./actions/flip";
+import { rotate } from "./actions/rotate";
 import { multiplayerAssetStore } from "./multiplayerAssetStore";
-import { useCallback } from "react";
 import { setup } from "./setup";
 import { customBindingUtils, customShapeUtils } from "./shapes";
-import { overrides } from "./overrides";
 
 const WORKER_URL = process.env.TLDRAW_WORKER_URL;
 const shapeUtils = [...defaultShapeUtils, ...customShapeUtils];
@@ -22,6 +24,23 @@ const components: TLComponents = {
   SelectionForeground: null,
   StylePanel: null,
   Toolbar: null,
+};
+
+const overrides: TLUiOverrides = {
+  actions: (editor, actions) => {
+    // Custom actions
+    return { ...actions, ...flip(editor), ...rotate(editor) };
+  },
+  tools: (_editor, tools) => {
+    // Remove tools
+    delete tools.arrow;
+    delete tools.ellipse;
+    delete tools.eraser;
+    delete tools.frame;
+    delete tools.line;
+    delete tools.rectangle;
+    return tools;
+  },
 };
 
 export default function App() {
