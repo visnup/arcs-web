@@ -6,7 +6,7 @@ import starportDamaged from "./starport-dmg.jpg";
 import mask from "./building-mask.png";
 import { StackableShapeUtil } from "../stack";
 
-const aspect = 298 / 266;
+const aspect = 150 / 136;
 export const w = 40;
 export const h = w / aspect;
 
