@@ -4,6 +4,7 @@ import {
   type TLOnMountHandler,
   type TLComponents,
   defaultBindingUtils,
+  type TLUiOverrides,
 } from "tldraw";
 import { useSync } from "@tldraw/sync";
 import "tldraw/tldraw.css";
@@ -21,6 +22,19 @@ const components: TLComponents = {
   SelectionForeground: null,
   StylePanel: null,
   Toolbar: null,
+};
+
+const overrides: TLUiOverrides = {
+  tools: (_editor, tools) => {
+    // Remove tools
+    delete tools.arrow;
+    delete tools.ellipse;
+    delete tools.eraser;
+    delete tools.frame;
+    delete tools.line;
+    delete tools.rectangle;
+    return tools;
+  },
 };
 
 export default function App() {
@@ -61,6 +75,7 @@ export default function App() {
         shapeUtils={shapeUtils}
         bindingUtils={bindingUtils}
         components={components}
+        overrides={overrides}
         onMount={onMount}
       />
     </div>
