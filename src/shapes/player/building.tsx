@@ -12,11 +12,11 @@ export const h = w / aspect;
 
 type BuildingShape = TLBaseShape<
   "city" | "starport",
-  { w: number; h: number; slot: number; fresh: boolean }
+  { w: number; h: number; slot: number; faceUp: boolean }
 >;
 class BuildingShapeUtil extends StackableShapeUtil<BuildingShape> {
   getDefaultProps() {
-    return { w, h, slot: 0, fresh: true };
+    return { w, h, slot: 0, faceUp: true };
   }
 
   canResize() {
@@ -26,10 +26,10 @@ class BuildingShapeUtil extends StackableShapeUtil<BuildingShape> {
   component(shape: BuildingShape) {
     const url =
       shape.type === "city"
-        ? shape.props.fresh
+        ? shape.props.faceUp
           ? city
           : cityDamaged
-        : shape.props.fresh
+        : shape.props.faceUp
           ? starport
           : starportDamaged;
     const offset = shape.props.slot * 25;

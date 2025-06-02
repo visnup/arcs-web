@@ -5,6 +5,8 @@ import {
   type TLComponents,
   defaultBindingUtils,
   type TLUiOverrides,
+  type TLUiActionItem,
+  type TLUnknownShape,
 } from "tldraw";
 import { useSync } from "@tldraw/sync";
 import "tldraw/tldraw.css";
@@ -25,6 +27,28 @@ const components: TLComponents = {
 };
 
 const overrides: TLUiOverrides = {
+  actions: (editor, actions) => {
+    const flipAction: TLUiActionItem = {
+      id: "flip",
+      label: "Flip",
+      kbd: "f",
+      onSelect: () => {
+        editor.updateShapes(
+          [...editor.getSelectedShapes(), editor.getHoveredShape()]
+            .filter(
+              (s): s is TLUnknownShape & { props: { faceUp: boolean } } =>
+                !!s && "faceUp" in s.props,
+            )
+            .map((s) => ({
+              id: s.id,
+              type: s.type,
+              props: { faceUp: !s.props.faceUp },
+            })),
+        );
+      },
+    };
+    return { ...actions, flip: flipAction };
+  },
   tools: (_editor, tools) => {
     // Remove tools
     delete tools.arrow;
