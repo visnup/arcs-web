@@ -30,20 +30,20 @@ export const overrides: TLUiOverrides = {
         angle,
       );
     };
-    const rotateLeft: TLUiActionItem = {
-      id: "rotate-left",
-      label: "Rotate left",
+    const rotateCCW: TLUiActionItem = {
+      id: "rotate-ccw-hover",
+      label: "Rotate counterclockwise",
       kbd: "q",
       onSelect: rotate(-Math.PI / 4),
     };
-    const rotateRight: TLUiActionItem = {
-      id: "rotate-right",
-      label: "Rotate right",
+    const rotateCW: TLUiActionItem = {
+      id: "rotate-cw-hover",
+      label: "Rotate clockwise",
       kbd: "e",
       onSelect: rotate(Math.PI / 4),
     };
 
-    return { ...actions, flip, rotateLeft, rotateRight };
+    return { ...actions, flip, rotateCCW, rotateCW };
   },
 
   tools: (_editor, tools) => {
