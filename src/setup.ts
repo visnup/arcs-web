@@ -123,9 +123,10 @@ export function setup(editor: Editor) {
     d3.range(0, 31).map((index) => ({
       id: createShapeId(`bc-${index}`),
       type: "card",
-      x: bounds.w + gap,
-      y: 0,
-      props: { index },
+      x: bounds.w + 158 + gap,
+      y: bounds.h - 100,
+      rotation: Math.PI / 2,
+      props: { index, faceUp: false },
     })),
   );
 }

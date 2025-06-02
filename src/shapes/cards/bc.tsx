@@ -8,13 +8,20 @@ export const h = w / aspect;
 
 type CardShape = TLBaseShape<
   "card",
-  { w: number; h: number; faceUp: boolean; index: number }
+  {
+    w: number;
+    h: number;
+    cols: number;
+    rows: number;
+    faceUp: boolean;
+    index: number;
+  }
 >;
 export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
   static override type = "card";
 
   getDefaultProps() {
-    return { w, h, faceUp: true, index: 0 };
+    return { w, h, cols: 7, rows: 5, faceUp: true, index: 0 };
   }
 
   canResize() {
@@ -22,34 +29,41 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
   }
 
   component(shape: CardShape) {
-    const url = shape.props.faceUp ? front : back;
-    const index = shape.props.index;
+    if (shape.props.faceUp) {
+      const { cols, rows, index } = shape.props;
 
-    // Sprite sheet dimensions
-    const cols = 7;
-    const rows = 5;
+      const col = index % cols;
+      const row = Math.floor(index / cols);
+      const bgX = col * (100 / (cols - 1));
+      const bgY = row * (100 / (rows - 1));
 
-    // Calculate position in grid
-    const col = index % cols;
-    const row = Math.floor(index / cols);
-
-    // Calculate background position as percentage
-    const bgX = col * (100 / (cols - 1));
-    const bgY = row * (100 / (rows - 1));
-
-    return (
-      <div
-        id={shape.id}
-        style={{
-          backgroundImage: `url(${url})`,
-          backgroundSize: `${cols * w}px ${rows * h}px`,
-          backgroundPosition: `${bgX}% ${bgY}%`,
-          width: w,
-          height: h,
-          borderRadius: 5,
-        }}
-      />
-    );
+      return (
+        <div
+          id={shape.id}
+          style={{
+            backgroundImage: `url(${front})`,
+            backgroundSize: `${cols * w}px ${rows * h}px`,
+            backgroundPosition: `${bgX}% ${bgY}%`,
+            width: w,
+            height: h,
+            borderRadius: 5,
+          }}
+        />
+      );
+    } else {
+      return (
+        <div
+          id={shape.id}
+          style={{
+            backgroundImage: `url(${back})`,
+            backgroundSize: `${w}px ${h}px`,
+            width: w,
+            height: h,
+            borderRadius: 5,
+          }}
+        />
+      );
+    }
   }
 
   indicator(shape: CardShape) {
