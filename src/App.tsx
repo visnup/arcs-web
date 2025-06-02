@@ -28,7 +28,7 @@ const components: TLComponents = {
 
 const overrides: TLUiOverrides = {
   actions: (editor, actions) => {
-    const flipAction: TLUiActionItem = {
+    const flip: TLUiActionItem = {
       id: "flip",
       label: "Flip",
       kbd: "f",
@@ -47,7 +47,29 @@ const overrides: TLUiOverrides = {
         );
       },
     };
-    return { ...actions, flip: flipAction };
+
+    const rotate = (angle: number) => () => {
+      editor.rotateShapesBy(
+        [...editor.getSelectedShapeIds(), editor.getHoveredShapeId()].filter(
+          (s) => s !== null,
+        ),
+        angle,
+      );
+    };
+    const rotateLeft: TLUiActionItem = {
+      id: "rotate-left",
+      label: "Rotate left",
+      kbd: "q",
+      onSelect: rotate(-Math.PI / 2),
+    };
+    const rotateRight: TLUiActionItem = {
+      id: "rotate-right",
+      label: "Rotate right",
+      kbd: "e",
+      onSelect: rotate(Math.PI / 2),
+    };
+
+    return { ...actions, flip, rotateLeft, rotateRight };
   },
   tools: (_editor, tools) => {
     // Remove tools
