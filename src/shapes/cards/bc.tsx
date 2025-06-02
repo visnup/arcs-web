@@ -2,8 +2,8 @@ import { BaseBoxShapeUtil, type TLBaseShape } from "tldraw";
 import front from "./bc.jpg";
 import back from "./bc-back.jpg";
 
-const aspect = 515 / 816;
-export const w = 100;
+const aspect = 719 / 1005;
+export const w = 95;
 export const h = w / aspect;
 
 type CardShape = TLBaseShape<

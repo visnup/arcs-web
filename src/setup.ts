@@ -123,7 +123,7 @@ export function setup(editor: Editor) {
     d3.shuffle(d3.range(0, 31)).map((index) => ({
       id: createShapeId(`bc-${index}`),
       type: "card",
-      x: bounds.w + 158 + gap,
+      x: bounds.w + 132 + gap,
       y: bounds.h - 100,
       rotation: Math.PI / 2,
       props: { index, faceUp: false },
