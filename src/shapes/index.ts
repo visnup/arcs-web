@@ -10,10 +10,12 @@ import { InitiativeMarkerShapeUtil } from "./initiative";
 import { StackBindingUtil, StackShapeUtil } from "./stack";
 import { CardShapeUtil } from "./cards/card";
 import { AmbitionDeclaredMarkerShapeUtil } from "./ambition-declared";
+import { AmbitionMarkerShapeUtil } from "./ambition";
 
 export const customShapeUtils = [
   AgentShapeUtil,
   AmbitionDeclaredMarkerShapeUtil,
+  AmbitionMarkerShapeUtil,
   BoardShapeUtil,
   CardShapeUtil,
   ChapterMarkerShapeUtil,

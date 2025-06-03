@@ -12,6 +12,7 @@ import { Environment } from "./types";
 // add custom shapes and bindings here if needed:
 const customShapes = [
   "agent",
+  "ambition",
   "ambition-declared",
   "board",
   "card",

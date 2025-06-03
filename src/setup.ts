@@ -31,6 +31,16 @@ export function setup(editor: Editor) {
     x: bounds.minX + 27,
     y: bounds.maxY - 103,
   });
+  editor.createShapes(
+    [0, 1, 2].map((index) => ({
+      id: createShapeId(`ambition-${index}`),
+      type: "ambition",
+      x: bounds.w - 155 + 46 * index,
+      y: 122,
+      rotation: -Math.PI / 2,
+      props: { index },
+    })),
+  );
 
   // Resources
   editor.createShapes(
