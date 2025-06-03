@@ -10,7 +10,7 @@ import bcBack from "./shapes/cards/bc-back.jpg";
 const jitter = () => Math.random() * 5;
 
 export function setup(editor: Editor) {
-  const gap = 20;
+  const gap = 10;
 
   // Map
   const mapId = createShapeId("map");
@@ -75,10 +75,10 @@ export function setup(editor: Editor) {
 
   // Player boards
   const positions = [
-    { x: bounds.maxX - w, y: bounds.maxY + gap }, // bottom-right
-    { x: bounds.minX, y: bounds.maxY + gap }, // bottom-left
-    { x: bounds.minX, y: bounds.minY - h - gap }, // top-left
-    { x: bounds.maxX - w, y: bounds.minY - h - gap }, // top-right
+    { x: bounds.maxX - w, y: bounds.maxY + 140 + gap }, // bottom-right
+    { x: bounds.minX, y: bounds.maxY + 140 + gap }, // bottom-left
+    { x: bounds.minX, y: bounds.minY - h - 140 - gap }, // top-left
+    { x: bounds.maxX - w, y: bounds.minY - h - 140 - gap }, // top-right
   ];
   // Initiative
   editor.createShape({
@@ -131,7 +131,7 @@ export function setup(editor: Editor) {
         type: "ship",
         props: { slot },
         x: positions[slot].x + w + gap + jitter(),
-        y: positions[slot].y + 3.75 * gap + jitter(),
+        y: positions[slot].y + 70 + jitter(),
       })),
     ),
   );
@@ -143,7 +143,7 @@ export function setup(editor: Editor) {
         type: "agent",
         props: { slot },
         x: positions[slot].x + w + gap + 20 + jitter(),
-        y: positions[slot].y + 6 * gap + jitter(),
+        y: positions[slot].y + 110 + jitter(),
       })),
     ),
   );
