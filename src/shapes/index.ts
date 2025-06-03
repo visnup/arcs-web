@@ -9,9 +9,11 @@ import { ChapterMarkerShapeUtil } from "./chapter";
 import { InitiativeMarkerShapeUtil } from "./initiative";
 import { StackBindingUtil, StackShapeUtil } from "./stack";
 import { CardShapeUtil } from "./cards/bc";
+import { AmbitionDeclaredMarkerShapeUtil } from "./ambition-declared";
 
 export const customShapeUtils = [
   AgentShapeUtil,
+  AmbitionDeclaredMarkerShapeUtil,
   BoardShapeUtil,
   CardShapeUtil,
   ChapterMarkerShapeUtil,

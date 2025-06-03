@@ -18,6 +18,13 @@ export function setup(editor: Editor) {
     x: bounds.maxX - 161,
     y: bounds.maxY - 66,
   });
+  // Ambition declared
+  editor.createShape({
+    id: createShapeId("ambition-declared"),
+    type: "ambition-declared",
+    x: bounds.minX + 27,
+    y: bounds.maxY - 103,
+  });
 
   // Player boards
   const gap = 20;
