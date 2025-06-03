@@ -94,8 +94,8 @@ export function setup(editor: Editor) {
   editor.createShape({
     id: createShapeId("initiative"),
     type: "initiative",
-    x: positions[0].x - 50,
-    y: positions[0].y,
+    x: positions[0].x - 60,
+    y: positions[0].y - 120,
   });
   const slots = [0, 1, 2, 3];
   editor.createShapes(
