@@ -2,12 +2,16 @@ import { createShapeId, Editor } from "tldraw";
 import { w, h } from "./shapes/player/board";
 import * as d3 from "d3-array";
 import { resources } from "./shapes/resource";
+import action from "./shapes/cards/action.jpg";
+import actionBack from "./shapes/cards/action-back.jpg";
 import bc from "./shapes/cards/bc.jpg";
 import bcBack from "./shapes/cards/bc-back.jpg";
 
 const jitter = () => Math.random() * 5;
 
 export function setup(editor: Editor) {
+  const gap = 20;
+
   // Map
   const mapId = createShapeId("map");
   editor.createShape({ id: mapId, type: "map", isLocked: true });
@@ -28,8 +32,48 @@ export function setup(editor: Editor) {
     y: bounds.maxY - 103,
   });
 
+  // Resources
+  editor.createShapes(
+    resources.flatMap((kind, i) =>
+      d3.range(0, 5).map((j) => ({
+        id: createShapeId(`resource-${kind}-${j}`),
+        type: "resource",
+        props: { kind },
+        x: -120 + jitter(),
+        y: bounds.h / 2 - i * 60 + 40 + jitter(),
+      })),
+    ),
+  );
+
+  // Base court
+  editor.createShapes(
+    d3.range(0, 31).map((index) => ({
+      id: createShapeId(`bc-${index}`),
+      type: "card",
+      x: bounds.w + 132 + gap,
+      y: bounds.h - 100,
+      rotation: Math.PI / 2,
+      props: { index, frontUrl: bc, backUrl: bcBack },
+    })),
+  );
+  // Action
+  editor.createShapes(
+    d3.range(0, 28).map((index) => ({
+      id: createShapeId(`action-${index}`),
+      type: "card",
+      x: 11,
+      y: 108,
+      rotation: -Math.PI / 2,
+      props: {
+        index,
+        rows: 7,
+        frontUrl: action,
+        backUrl: actionBack,
+      },
+    })),
+  );
+
   // Player boards
-  const gap = 20;
   const positions = [
     { x: bounds.maxX - w, y: bounds.maxY + gap }, // bottom-right
     { x: bounds.minX, y: bounds.maxY + gap }, // bottom-left
@@ -111,31 +155,6 @@ export function setup(editor: Editor) {
       props: { slot },
       x: 15 + (i % 2) * 15,
       y: bounds.maxY - 15 - Math.floor(i / 2) * 15,
-    })),
-  );
-
-  // Resources
-  editor.createShapes(
-    resources.flatMap((kind, i) =>
-      d3.range(0, 5).map((j) => ({
-        id: createShapeId(`resource-${kind}-${j}`),
-        type: "resource",
-        props: { kind },
-        x: -120 + jitter(),
-        y: bounds.h / 2 - i * 60 + 40 + jitter(),
-      })),
-    ),
-  );
-
-  // Base court
-  editor.createShapes(
-    d3.range(0, 31).map((index) => ({
-      id: createShapeId(`bc-${index}`),
-      type: "card",
-      x: bounds.w + 132 + gap,
-      y: bounds.h - 100,
-      rotation: Math.PI / 2,
-      props: { index, faceUp: false, frontUrl: bc, backUrl: bcBack },
     })),
   );
 }

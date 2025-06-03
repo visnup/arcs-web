@@ -26,7 +26,7 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
       h,
       cols: 7,
       rows: 5,
-      faceUp: true,
+      faceUp: false,
       index: 0,
       frontUrl: "about:blank",
       backUrl: "about:blank",
