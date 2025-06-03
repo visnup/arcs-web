@@ -16,15 +16,14 @@ export const group: (editor: Editor) => TLUiActionsContextType = (editor) => ({
         rollups(
           shapes,
           (r) => r.length,
-          (s) => JSON.stringify({ x: s.x, y: s.y }),
+          (s) => JSON.stringify({ x: s.x, y: s.y, rotation: s.rotation }),
         ).sort((a, b) => b[1] - a[1])[0][0],
       );
       editor.updateShapes(
         shapes.map((s) => ({
           id: s.id,
           type: s.type,
-          x: most.x,
-          y: most.y,
+          ...most,
         })),
       );
     },
