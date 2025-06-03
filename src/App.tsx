@@ -15,6 +15,7 @@ import { shuffle } from "./actions/shuffle";
 import { multiplayerAssetStore } from "./multiplayerAssetStore";
 import { setup } from "./setup";
 import { customBindingUtils, customShapeUtils } from "./shapes";
+import { group } from "./actions/group";
 
 const WORKER_URL = process.env.TLDRAW_WORKER_URL;
 const shapeUtils = [...defaultShapeUtils, ...customShapeUtils];
@@ -30,11 +31,20 @@ const components: TLComponents = {
 const overrides: TLUiOverrides = {
   actions: (editor, actions) => {
     // Custom actions
-    return {
-      ...actions,
+    const custom = {
       ...flip(editor),
+      ...group(editor),
       ...rotate(editor),
       ...shuffle(editor),
+    };
+
+    // Remove conflicting keys
+    const kbd = new Set(Object.values(custom).map((a) => a.kbd));
+    for (const v of Object.values(actions)) if (kbd.has(v.kbd)) delete v.kbd;
+
+    return {
+      ...actions,
+      ...custom,
     };
   },
   tools: (_editor, tools) => {
