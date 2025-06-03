@@ -1,6 +1,4 @@
 import { BaseBoxShapeUtil, type TLBaseShape } from "tldraw";
-import front from "./bc.jpg";
-import back from "./bc-back.jpg";
 
 const aspect = 719 / 1005;
 export const w = 95;
@@ -15,13 +13,24 @@ type CardShape = TLBaseShape<
     rows: number;
     faceUp: boolean;
     index: number;
+    frontUrl: string;
+    backUrl: string;
   }
 >;
 export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
   static override type = "card";
 
   getDefaultProps() {
-    return { w, h, cols: 7, rows: 5, faceUp: true, index: 0 };
+    return {
+      w,
+      h,
+      cols: 7,
+      rows: 5,
+      faceUp: true,
+      index: 0,
+      frontUrl: "about:blank",
+      backUrl: "about:blank",
+    };
   }
 
   canResize() {
@@ -30,7 +39,7 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
 
   component(shape: CardShape) {
     if (shape.props.faceUp) {
-      const { cols, rows, index } = shape.props;
+      const { cols, rows, index, frontUrl } = shape.props;
 
       const col = index % cols;
       const row = Math.floor(index / cols);
@@ -41,7 +50,7 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
         <div
           id={shape.id}
           style={{
-            backgroundImage: `url(${front})`,
+            backgroundImage: `url(${frontUrl})`,
             backgroundSize: `${cols * w}px ${rows * h}px`,
             backgroundPosition: `${bgX}% ${bgY}%`,
             width: w,
@@ -51,11 +60,12 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
         />
       );
     } else {
+      const { backUrl } = shape.props;
       return (
         <div
           id={shape.id}
           style={{
-            backgroundImage: `url(${back})`,
+            backgroundImage: `url(${backUrl})`,
             backgroundSize: `${w}px ${h}px`,
             width: w,
             height: h,

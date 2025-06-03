@@ -2,6 +2,8 @@ import { createShapeId, Editor } from "tldraw";
 import { w, h } from "./shapes/player/board";
 import * as d3 from "d3-array";
 import { resources } from "./shapes/resource";
+import bc from "./shapes/cards/bc.jpg";
+import bcBack from "./shapes/cards/bc-back.jpg";
 
 const jitter = () => Math.random() * 5;
 
@@ -133,7 +135,7 @@ export function setup(editor: Editor) {
       x: bounds.w + 132 + gap,
       y: bounds.h - 100,
       rotation: Math.PI / 2,
-      props: { index, faceUp: false },
+      props: { index, faceUp: false, frontUrl: bc, backUrl: bcBack },
     })),
   );
 }
