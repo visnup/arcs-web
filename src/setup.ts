@@ -6,10 +6,18 @@ import action from "./shapes/cards/action.jpg";
 import actionBack from "./shapes/cards/action-back.jpg";
 import bc from "./shapes/cards/bc.jpg";
 import bcBack from "./shapes/cards/bc-back.jpg";
+import type { ShipShapeUtil } from "./shapes/player/ship";
+import type { AgentShapeUtil } from "./shapes/player/agent";
+import type { StarportShapeUtil } from "./shapes/player/building";
 
 const jitter = () => Math.random() * 5;
 
 export function setup(editor: Editor) {
+  // Reset stacks
+  editor.deleteShapes(
+    editor.getCurrentPageShapes().filter((s) => s.type === "stack"),
+  );
+
   const gap = 10;
 
   // Map
@@ -133,6 +141,10 @@ export function setup(editor: Editor) {
       })),
     ),
   );
+  for (const s of slots)
+    (editor.getShapeUtil("starport") as StarportShapeUtil).stack(
+      editor.getShape(createShapeId(`starport-${s}-4`))!,
+    );
   // Ships
   editor.createShapes(
     slots.flatMap((slot) =>
@@ -145,6 +157,10 @@ export function setup(editor: Editor) {
       })),
     ),
   );
+  for (const s of slots)
+    (editor.getShapeUtil("ship") as ShipShapeUtil).stack(
+      editor.getShape(createShapeId(`ship-${s}-14`))!,
+    );
   // Agents
   editor.createShapes(
     slots.flatMap((slot) =>
@@ -157,6 +173,10 @@ export function setup(editor: Editor) {
       })),
     ),
   );
+  for (const s of slots)
+    (editor.getShapeUtil("agent") as AgentShapeUtil).stack(
+      editor.getShape(createShapeId(`agent-${s}-9`))!,
+    );
   // Power markers
   editor.createShapes(
     slots.map((slot, i) => ({

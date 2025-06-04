@@ -36,6 +36,10 @@ export abstract class StackableShapeUtil<
   }
 
   onTranslateEnd(_initial: T, shape: T) {
+    this.stack(shape);
+  }
+
+  stack(shape: T) {
     if (this.editor.getBindingsFromShape(shape, "stack").length) return;
     const { center } = this.editor.getShapePageGeometry(shape);
     const shapes = this.editor
