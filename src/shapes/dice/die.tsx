@@ -60,12 +60,19 @@ export class DieShapeUtil extends BaseBoxShapeUtil<DieShape> {
   }
 
   onPrimaryAction(shapes: DieShape[]) {
-    this.editor.updateShapes(
-      shapes.map((s) => ({
-        id: s.id,
-        type: s.type,
-        props: { face: Math.floor(Math.random() * 6) },
-      })),
-    );
+    this.editor.run(() => {
+      this.editor.updateShapes(
+        shapes.map((s) => ({
+          id: s.id,
+          type: s.type,
+          props: { face: Math.floor(Math.random() * 6) },
+        })),
+      );
+      for (const { id } of shapes)
+        this.editor.rotateShapesBy(
+          [id],
+          (Math.random() * Math.PI) / 6 - Math.PI / 12,
+        );
+    });
   }
 }
