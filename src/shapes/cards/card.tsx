@@ -1,4 +1,4 @@
-import { BaseBoxShapeUtil, type TLBaseShape } from "tldraw";
+import { BaseBoxShapeUtil, Vec, type TLBaseShape } from "tldraw";
 
 const aspect = 719 / 1005;
 export const w = 95;
@@ -78,5 +78,23 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
 
   indicator(shape: CardShape) {
     return this.editor.getShapeUtil("image").indicator(shape);
+  }
+
+  onTranslateEnd(_initial: CardShape, shape: CardShape) {
+    const { center } = this.editor.getShapePageGeometry(shape);
+    const below = this.editor
+      .getShapesAtPoint(center, { hitInside: true })
+      .find((s) => s !== shape && s.type === shape.type) as CardShape;
+    if (!below) return;
+    const { center: p } = this.editor.getShapePageGeometry(below);
+    if (Vec.Dist(center, p) <= 40)
+      this.editor.updateShape({
+        id: shape.id,
+        type: shape.type,
+        x: below.x,
+        y: below.y,
+        rotation: below.rotation,
+        props: { faceUp: below.props.faceUp },
+      });
   }
 }
