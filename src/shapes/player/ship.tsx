@@ -14,12 +14,15 @@ const Path = (props: React.SVGProps<SVGPathElement>) => (
   />
 );
 
-type ShipShape = TLBaseShape<"ship", { w: number; h: number; slot: number }>;
+type ShipShape = TLBaseShape<
+  "ship",
+  { w: number; h: number; slot: number; faceUp: boolean }
+>;
 export class ShipShapeUtil extends StackableShapeUtil<ShipShape> {
   static override type = "ship" as const;
 
   getDefaultProps() {
-    return { w, h, slot: 0 };
+    return { w, h, slot: 0, faceUp: false };
   }
 
   canResize() {
@@ -27,10 +30,17 @@ export class ShipShapeUtil extends StackableShapeUtil<ShipShape> {
   }
 
   component(shape: ShipShape) {
-    const color = colors[shape.props.slot];
+    const { slot, faceUp, w, h } = shape.props;
+    const color = colors[slot];
     return (
-      <SVGContainer id={shape.id} viewBox="0 0 314 125">
-        <Path fill={color} stroke="hsl(0, 0%, 0%, 0.2)" strokeWidth="0.5" />
+      <SVGContainer
+        id={shape.id}
+        width={w}
+        height={h}
+        viewBox="0 0 314 125"
+        style={faceUp ? { filter: "brightness(0.6)" } : {}}
+      >
+        <Path fill={color} stroke="hsl(0, 0%, 0%, 0.4)" strokeWidth="0.5" />
       </SVGContainer>
     );
   }

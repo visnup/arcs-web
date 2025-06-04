@@ -30,7 +30,7 @@ export class AgentShapeUtil extends StackableShapeUtil<AgentShape> {
     const color = colors[shape.props.slot];
     return (
       <SVGContainer id={shape.id} viewBox="0 0 102 171">
-        <Path fill={color} stroke="hsl(0, 0%, 0%, 0.2)" strokeWidth="0.5" />
+        <Path fill={color} stroke="hsl(0, 0%, 0%, 0.4)" strokeWidth="0.5" />
       </SVGContainer>
     );
   }
