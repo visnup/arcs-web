@@ -11,7 +11,7 @@ import {
 import "tldraw/tldraw.css";
 import { flip } from "./actions/flip";
 import { rotate } from "./actions/rotate";
-import { shuffle } from "./actions/shuffle";
+import { primary } from "./actions/primary";
 import { multiplayerAssetStore } from "./multiplayerAssetStore";
 import { setup } from "./setup";
 import { customBindingUtils, customShapeUtils } from "./shapes";
@@ -34,8 +34,8 @@ const overrides: TLUiOverrides = {
     const custom = {
       ...flip(editor),
       ...group(editor),
+      ...primary(editor),
       ...rotate(editor),
-      ...shuffle(editor),
     };
 
     // Remove conflicting keys

@@ -1,3 +1,4 @@
+import { shuffle } from "d3-array";
 import { BaseBoxShapeUtil, Vec, type TLBaseShape } from "tldraw";
 
 const aspect = 719 / 1005;
@@ -96,5 +97,13 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
         rotation: below.rotation,
         props: { faceUp: below.props.faceUp },
       });
+  }
+
+  // Shuffle
+  onPrimaryAction(shapes: CardShape[]) {
+    const order = shuffle(shapes);
+    this.editor.run(() => {
+      for (const id of order) this.editor.bringToFront([id]);
+    });
   }
 }
