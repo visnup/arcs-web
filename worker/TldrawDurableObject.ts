@@ -18,6 +18,7 @@ const customShapes = [
   "card",
   "chapter",
   "city",
+  "die",
   "initiative",
   "map",
   "power",

@@ -91,6 +91,19 @@ export function setup(editor: Editor) {
     })),
   );
 
+  // Dice
+  editor.createShapes(
+    ["assault", "raid", "skirmish"].flatMap((kind, i) =>
+      d3.range(0, 6).map((face) => ({
+        id: createShapeId(`die-${kind}-${face}`),
+        type: "die",
+        x: -230 - i * 60,
+        y: 135 + face * 45,
+        props: { kind, face },
+      })),
+    ),
+  );
+
   // Player boards
   const positions = [
     { x: bounds.maxX - w, y: bounds.maxY + 140 + gap }, // bottom-right
