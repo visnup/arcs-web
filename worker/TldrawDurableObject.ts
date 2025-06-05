@@ -16,6 +16,7 @@ const customShapes = [
   "ambition-declared",
   "board",
   "card",
+  "card-holder",
   "chapter",
   "city",
   "die",
@@ -27,7 +28,7 @@ const customShapes = [
   "stack",
   "starport",
 ];
-const customBindings = ["stack"];
+const customBindings = ["card-holder", "stack"];
 const schema = createTLSchema({
   shapes: {
     ...defaultShapeSchemas,

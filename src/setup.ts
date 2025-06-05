@@ -104,12 +104,12 @@ export function setup(editor: Editor) {
     ),
   );
 
-  // Player boards
+  // Players
   const positions = [
-    { x: bounds.maxX - w, y: bounds.maxY + 140 + gap }, // bottom-right
-    { x: bounds.minX, y: bounds.maxY + 140 + gap }, // bottom-left
-    { x: bounds.minX, y: bounds.minY - h - 140 - gap }, // top-left
-    { x: bounds.maxX - w, y: bounds.minY - h - 140 - gap }, // top-right
+    { x: bounds.maxX - w, y: bounds.maxY + h + gap }, // bottom-right
+    { x: bounds.minX, y: bounds.maxY + h + gap }, // bottom-left
+    { x: bounds.minX, y: bounds.minY - 2 * h - gap }, // top-left
+    { x: bounds.maxX - w, y: bounds.minY - 2 * h - gap }, // top-right
   ];
   // Initiative
   editor.createShape({
@@ -118,6 +118,7 @@ export function setup(editor: Editor) {
     x: positions[0].x - 60,
     y: positions[0].y - 120,
   });
+  // Player boards
   const slots = [0, 1, 2, 3];
   editor.createShapes(
     slots.map((slot) => ({
@@ -129,6 +130,26 @@ export function setup(editor: Editor) {
       props: { slot },
     })),
   );
+  // Card holders
+  editor
+    .createShapes(
+      slots.map((slot) => ({
+        id: createShapeId(`cards-${slot}`),
+        type: "card-holder",
+        x: positions[slot].x,
+        y: positions[slot].y + h * (slot <= 1 ? -1 : 1),
+        isLocked: true,
+        props: { w, h, slot },
+      })),
+    )
+    .deleteBindings(
+      slots.flatMap((slot) =>
+        editor.getBindingsToShape(
+          createShapeId(`cards-${slot}`),
+          "card-holder",
+        ),
+      ),
+    );
 
   // Cities
   editor.createShapes(

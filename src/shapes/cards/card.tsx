@@ -5,7 +5,7 @@ const aspect = 719 / 1005;
 export const w = 95;
 export const h = w / aspect;
 
-type CardShape = TLBaseShape<
+export type CardShape = TLBaseShape<
   "card",
   {
     w: number;
@@ -79,6 +79,10 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
 
   indicator(shape: CardShape) {
     return this.editor.getShapeUtil("image").indicator(shape);
+  }
+
+  onTranslateStart(shape: CardShape) {
+    this.editor.bringToFront([shape]);
   }
 
   onTranslateEnd(_initial: CardShape, shape: CardShape) {

@@ -12,6 +12,10 @@ import { CardShapeUtil } from "./cards/card";
 import { AmbitionDeclaredMarkerShapeUtil } from "./ambition-declared";
 import { AmbitionMarkerShapeUtil } from "./ambition";
 import { DieShapeUtil } from "./dice/die";
+import {
+  CardHolderBindingUtil,
+  CardHolderShapeUtil,
+} from "./cards/card-holder";
 
 export const customShapeUtils = [
   AgentShapeUtil,
@@ -19,6 +23,7 @@ export const customShapeUtils = [
   AmbitionMarkerShapeUtil,
   BoardShapeUtil,
   CardShapeUtil,
+  CardHolderShapeUtil,
   ChapterMarkerShapeUtil,
   CityShapeUtil,
   DieShapeUtil,
@@ -31,4 +36,4 @@ export const customShapeUtils = [
   StarportShapeUtil,
 ];
 
-export const customBindingUtils = [StackBindingUtil];
+export const customBindingUtils = [CardHolderBindingUtil, StackBindingUtil];
