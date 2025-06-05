@@ -1,4 +1,4 @@
-import { type TLBaseShape } from "tldraw";
+import { HTMLContainer, type TLBaseShape } from "tldraw";
 import city from "./city.jpg";
 import cityDamaged from "./city-dmg.jpg";
 import starport from "./starport.jpg";
@@ -34,11 +34,9 @@ class BuildingShapeUtil extends StackableShapeUtil<BuildingShape> {
           : starportDamaged;
     const offset = shape.props.slot * 25;
     return (
-      <div
+      <HTMLContainer
         id={shape.id}
         style={{
-          width: "100%",
-          height: "100%",
           backgroundImage: `url(${url})`,
           backgroundSize: "auto 100%",
           backgroundPosition: `${offset}% 0`,

@@ -1,4 +1,4 @@
-import { BaseBoxShapeUtil, type TLBaseShape } from "tldraw";
+import { BaseBoxShapeUtil, SVGContainer, type TLBaseShape } from "tldraw";
 
 export const w = 28;
 
@@ -17,9 +17,9 @@ export class ChapterMarkerShapeUtil extends BaseBoxShapeUtil<ChapterMarkerShape>
   component(shape: ChapterMarkerShape) {
     const r = shape.props.w / 2;
     return (
-      <svg id={shape.id} xmlns="http://www.w3.org/2000/svg">
+      <SVGContainer id={shape.id} xmlns="http://www.w3.org/2000/svg">
         <circle r={r} cx={r} cy={r} fill="#a5a7aa" />
-      </svg>
+      </SVGContainer>
     );
   }
 

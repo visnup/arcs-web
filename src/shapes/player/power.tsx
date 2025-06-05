@@ -1,4 +1,4 @@
-import { BaseBoxShapeUtil, type TLBaseShape } from "tldraw";
+import { BaseBoxShapeUtil, SVGContainer, type TLBaseShape } from "tldraw";
 import { colors } from "./colors";
 
 export const w = 12;
@@ -21,9 +21,9 @@ export class PowerMarkerShapeUtil extends BaseBoxShapeUtil<PowerMarkerShape> {
   component(shape: PowerMarkerShape) {
     const color = colors[shape.props.slot];
     return (
-      <svg id={shape.id} xmlns="http://www.w3.org/2000/svg">
+      <SVGContainer id={shape.id} xmlns="http://www.w3.org/2000/svg">
         <rect fill={color} width={shape.props.w} height={shape.props.h} />
-      </svg>
+      </SVGContainer>
     );
   }
 

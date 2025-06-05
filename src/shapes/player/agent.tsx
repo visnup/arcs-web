@@ -1,4 +1,4 @@
-import { type TLBaseShape } from "tldraw";
+import { SVGContainer, type TLBaseShape } from "tldraw";
 import { colors } from "./colors";
 import { StackableShapeUtil } from "../stack";
 
@@ -29,15 +29,13 @@ export class AgentShapeUtil extends StackableShapeUtil<AgentShape> {
   component(shape: AgentShape) {
     const color = colors[shape.props.slot];
     return (
-      <svg
+      <SVGContainer
         id={shape.id}
-        width={shape.props.w}
-        height={shape.props.h}
         viewBox="0 0 102 171"
         xmlns="http://www.w3.org/2000/svg"
       >
         <Path fill={color} stroke="hsl(0, 0%, 0%, 0.2)" strokeWidth="0.5" />
-      </svg>
+      </SVGContainer>
     );
   }
 

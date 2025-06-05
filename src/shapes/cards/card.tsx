@@ -1,5 +1,5 @@
 import { shuffle } from "d3-array";
-import { BaseBoxShapeUtil, Vec, type TLBaseShape } from "tldraw";
+import { BaseBoxShapeUtil, HTMLContainer, Vec, type TLBaseShape } from "tldraw";
 
 const aspect = 719 / 1005;
 export const w = 95;
@@ -48,7 +48,7 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
       const bgY = row * (100 / (rows - 1));
 
       return (
-        <div
+        <HTMLContainer
           id={shape.id}
           style={{
             backgroundImage: `url(${frontUrl})`,
@@ -63,7 +63,7 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
     } else {
       const { backUrl } = shape.props;
       return (
-        <div
+        <HTMLContainer
           id={shape.id}
           style={{
             backgroundImage: `url(${backUrl})`,

@@ -1,4 +1,4 @@
-import { BaseBoxShapeUtil, type TLBaseShape } from "tldraw";
+import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
 import url from "./resources.jpg";
 
 const aspect = 1;
@@ -31,11 +31,9 @@ export class ResourceShapeUtil extends BaseBoxShapeUtil<ResourceShape> {
   component(shape: ResourceShape) {
     const offset = resources.indexOf(shape.props.kind) * 25;
     return (
-      <div
+      <HTMLContainer
         id={shape.id}
         style={{
-          width: "100%",
-          height: "100%",
           backgroundImage: `url(${url})`,
           backgroundSize: "auto 100%",
           backgroundPosition: `${offset}% 0`,

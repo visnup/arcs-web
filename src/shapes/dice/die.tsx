@@ -1,4 +1,4 @@
-import { BaseBoxShapeUtil, type TLBaseShape } from "tldraw";
+import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
 import assault from "./assault.jpg";
 import raid from "./raid.jpg";
 import skirmish from "./skirmish.jpg";
@@ -41,14 +41,12 @@ export class DieShapeUtil extends BaseBoxShapeUtil<DieShape> {
     const bgX = index * (100 / (cols - 1));
 
     return (
-      <div
+      <HTMLContainer
         id={shape.id}
         style={{
           backgroundImage: `url(${url})`,
           backgroundSize: `${cols * shape.props.w}px ${shape.props.h}px`,
           backgroundPosition: `${bgX}% 0%`,
-          width: shape.props.w,
-          height: shape.props.h,
           borderRadius: 5,
         }}
       />

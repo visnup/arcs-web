@@ -1,4 +1,4 @@
-import { BaseBoxShapeUtil, type TLBaseShape } from "tldraw";
+import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
 import ambition from "./ambition.jpg";
 import ambitionBack from "./ambition-back.jpg";
 
@@ -49,15 +49,12 @@ export class AmbitionMarkerShapeUtil extends BaseBoxShapeUtil<AmbitionMarkerShap
     const bgX = col * (100 / (cols - 1));
 
     return (
-      <div
+      <HTMLContainer
         id={shape.id}
         style={{
           backgroundImage: `url(${url})`,
           backgroundSize: `${cols * shape.props.w}px ${shape.props.h}px`,
           backgroundPosition: `${bgX}% 0%`,
-          width: shape.props.w,
-          height: shape.props.h,
-          borderRadius: 5,
           clipPath: `path("${scaled}")`,
         }}
       />

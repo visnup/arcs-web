@@ -1,4 +1,4 @@
-import { BaseBoxShapeUtil, type TLBaseShape } from "tldraw";
+import { BaseBoxShapeUtil, SVGContainer, type TLBaseShape } from "tldraw";
 
 const aspect = 104 / 318;
 export const w = 30;
@@ -26,15 +26,13 @@ export class InitiativeMarkerShapeUtil extends BaseBoxShapeUtil<InitiativeMakerS
 
   component(shape: InitiativeMakerShape) {
     return (
-      <svg
+      <SVGContainer
         id={shape.id}
-        width={shape.props.w}
-        height={shape.props.h}
         viewBox="0 0 104 318"
         xmlns="http://www.w3.org/2000/svg"
       >
         <Path fill="#a5a7aa" stroke="hsl(0, 0%, 0%, 0.2)" />
-      </svg>
+      </SVGContainer>
     );
   }
 
