@@ -95,7 +95,8 @@ export class CardHolderBindingUtil extends BindingUtil<CardHolderBinding> {
     const n = cards.length - 1;
     const overlap = w > holder.w ? (w - holder.w) / n : 10;
     this.editor.run(() => {
-      let x = (holder.w - w + overlap * n) / 2 - bounds[0].w + overlap;
+      let x =
+        holder.x + (holder.w - w + overlap * n) / 2 - bounds[0].w + overlap;
       this.editor.updateShapes(
         cards.map((c, i) => ({
           id: c,
