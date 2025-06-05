@@ -50,12 +50,6 @@ export class CardHolderShapeUtil extends BaseBoxShapeUtil<CardHolderShape> {
       })),
     );
   }
-
-  onDragShapesOut(_shape: CardHolderShape, shapes: TLShape[]): void {
-    this.editor.deleteBindings(
-      shapes.flatMap((s) => this.editor.getBindingsFromShape(s, "card-holder")),
-    );
-  }
 }
 
 type CardHolderBinding = TLBaseBinding<"card-holder", object>;

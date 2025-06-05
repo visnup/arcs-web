@@ -83,6 +83,9 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
 
   onTranslateStart(shape: CardShape) {
     this.editor.bringToFront([shape]);
+    this.editor.deleteBindings(
+      this.editor.getBindingsFromShape(shape, "card-holder"),
+    );
   }
 
   onTranslateEnd(_initial: CardShape, shape: CardShape) {
