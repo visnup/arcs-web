@@ -1,5 +1,11 @@
 import { shuffle } from "d3-array";
 import { BaseBoxShapeUtil, HTMLContainer, Vec, type TLBaseShape } from "tldraw";
+import { colors as _colors } from "../player/colors";
+import type { CardHolderShape } from "./card-holder";
+
+const colors = Object.fromEntries(
+  [..._colors.entries()].map(([i, color]) => [color, i]),
+);
 
 const aspect = 719 / 1005;
 export const w = 95;
@@ -38,8 +44,17 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
     return false;
   }
 
+  getHolder(shape: CardShape) {
+    const binding = this.editor.getBindingsFromShape(shape, "card-holder")[0];
+    return binding ? this.editor.getShape<CardHolderShape>(binding.toId) : null;
+  }
+
   component(shape: CardShape) {
-    if (shape.props.faceUp) {
+    const holder = this.getHolder(shape);
+    const faceUp = holder
+      ? holder.props.slot === colors[this.editor.user.getColor()]
+      : shape.props.faceUp;
+    if (faceUp) {
       const { cols, rows, index, frontUrl } = shape.props;
 
       const col = index % cols;

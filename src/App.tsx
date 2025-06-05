@@ -16,6 +16,8 @@ import { multiplayerAssetStore } from "./multiplayerAssetStore";
 import { setup } from "./setup";
 import { customBindingUtils, customShapeUtils } from "./shapes";
 import { group } from "./actions/group";
+import { SharePanel } from "./SharePanel";
+import { colors } from "./shapes/player/colors";
 
 const WORKER_URL = process.env.TLDRAW_WORKER_URL;
 const shapeUtils = [...defaultShapeUtils, ...customShapeUtils];
@@ -24,6 +26,7 @@ const bindingUtils = [...defaultBindingUtils, ...customBindingUtils];
 const components: TLComponents = {
   SelectionBackground: null,
   SelectionForeground: null,
+  SharePanel: SharePanel,
   StylePanel: null,
   Toolbar: null,
 };
@@ -69,7 +72,10 @@ export default function App() {
 
   const onMount = useCallback<TLOnMountHandler>((editor) => {
     if (window.location.search === "?new") setup(editor);
-    editor.user.updateUserPreferences({ colorScheme: "dark" });
+    editor.user.updateUserPreferences({
+      color: colors[0],
+      colorScheme: "dark",
+    });
     editor.zoomToFit();
   }, []);
 

@@ -10,15 +10,15 @@ import {
 } from "tldraw";
 import { type CardShape } from "./card";
 
-type CardHolderShape = TLBaseShape<
+export type CardHolderShape = TLBaseShape<
   "card-holder",
-  { w: number; h: number; slot: number }
+  { w: number; h: number; slot?: number }
 >;
 export class CardHolderShapeUtil extends BaseBoxShapeUtil<CardHolderShape> {
   static override type = "card-holder";
 
   getDefaultProps() {
-    return { w: 0, h: 0, slot: 0 };
+    return { w: 0, h: 0 };
   }
 
   canDropShapes(_shape: CardHolderShape, shapes: TLShape[]) {
