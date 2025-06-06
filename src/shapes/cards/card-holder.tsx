@@ -24,6 +24,9 @@ export class CardHolderShapeUtil extends BaseBoxShapeUtil<CardHolderShape> {
   canDropShapes(_shape: CardHolderShape, shapes: TLShape[]) {
     return shapes.every((s) => s.type === "card");
   }
+  canSnap() {
+    return false;
+  }
 
   component(shape: CardHolderShape) {
     return (

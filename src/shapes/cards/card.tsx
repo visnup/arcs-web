@@ -43,6 +43,9 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
   canResize() {
     return false;
   }
+  canSnap() {
+    return false;
+  }
 
   getHolder(shape: CardShape) {
     const binding = this.editor.getBindingsFromShape(shape, "card-holder")[0];

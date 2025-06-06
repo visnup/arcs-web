@@ -14,6 +14,10 @@ export class BoardShapeUtil extends BaseBoxShapeUtil<BoardShape> {
     return { w, h, slot: 0 };
   }
 
+  canSnap() {
+    return false;
+  }
+
   component(shape: BoardShape) {
     const backgroundColor = colors[shape.props.slot];
     return (

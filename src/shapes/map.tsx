@@ -12,9 +12,6 @@ export class MapShapeUtil extends BaseBoxShapeUtil<MapShape> {
   getDefaultProps() {
     return { w, h };
   }
-  canSnap() {
-    return true;
-  }
 
   component(shape: MapShape) {
     return (
@@ -26,5 +23,17 @@ export class MapShapeUtil extends BaseBoxShapeUtil<MapShape> {
 
   indicator(shape: MapShape) {
     return this.editor.getShapeUtil("image").indicator(shape);
+  }
+
+  getBoundsSnapGeometry() {
+    return {
+      points: [
+        { x: 75, y: 550, z: 0 }, // ambition declared
+        { x: 78, y: 463, z: 0 }, // card 1 (lead)
+        { x: 78, y: 344, z: 0 }, // card 2
+        { x: 78, y: 262, z: 0 }, // card 3
+        { x: 78, y: 179, z: 0 }, // card 4
+      ],
+    };
   }
 }
