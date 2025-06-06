@@ -72,8 +72,13 @@ export default function App() {
 
   const onMount = useCallback<TLOnMountHandler>((editor) => {
     if (window.location.search === "?new") setup(editor);
+    let color = editor.user.getColor();
+    if (!colors.includes(color)) {
+      const others = editor.getCollaboratorsOnCurrentPage().map((u) => u.color);
+      color = colors.find((c) => !others.includes(c)) ?? colors[0];
+    }
     editor.user.updateUserPreferences({
-      color: colors[0],
+      color,
       colorScheme: "dark",
     });
     editor.zoomToFit();
