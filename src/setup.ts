@@ -257,7 +257,7 @@ export function setup(editor: Editor) {
         id: createShapeId(`lore-${14 * i + index}`),
         type: "card",
         x: bounds.w + 420,
-        y: 0,
+        y: 30,
         props: {
           index,
           rows: 2,
@@ -274,7 +274,7 @@ export function setup(editor: Editor) {
     Object.entries(blocks).map(([kind, { props }], i) => ({
       id: createShapeId(`block-${kind}-1`),
       type: "block",
-      x: bounds.w + 300,
+      x: bounds.w + 350 - props.w / 2,
       y: 300 + i * 60,
       props,
     })),
