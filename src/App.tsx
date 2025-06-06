@@ -81,7 +81,6 @@ export default function App() {
       color,
       colorScheme: "dark",
     });
-    editor.zoomToFit();
   }, []);
 
   return (
@@ -93,6 +92,7 @@ export default function App() {
         components={components}
         overrides={overrides}
         onMount={onMount}
+        deepLinks
       />
     </div>
   );
