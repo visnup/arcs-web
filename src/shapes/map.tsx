@@ -28,7 +28,7 @@ export class MapShapeUtil extends BaseBoxShapeUtil<MapShape> {
   getBoundsSnapGeometry() {
     return {
       points: [
-        { x: 75, y: 550, z: 0 }, // ambition declared
+        // { x: 75, y: 550, z: 0 }, // ambition declared
         { x: 78, y: 463, z: 0 }, // card 1 (lead)
         { x: 78, y: 344, z: 0 }, // card 2
         { x: 78, y: 262, z: 0 }, // card 3
