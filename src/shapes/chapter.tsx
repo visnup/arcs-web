@@ -13,6 +13,9 @@ export class ChapterMarkerShapeUtil extends BaseBoxShapeUtil<ChapterMarkerShape>
   canResize() {
     return false;
   }
+  canSnap() {
+    return false;
+  }
 
   component(shape: ChapterMarkerShape) {
     const r = shape.props.w / 2;

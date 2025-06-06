@@ -39,6 +39,9 @@ export class AmbitionMarkerShapeUtil extends BaseBoxShapeUtil<AmbitionMarkerShap
   canResize() {
     return false;
   }
+  canSnap() {
+    return false;
+  }
 
   component(shape: AmbitionMarkerShape) {
     const { index, faceUp } = shape.props;

@@ -18,6 +18,10 @@ export class StackShapeUtil extends BaseBoxShapeUtil<StackShape> {
     return { w: 10, h: 10, count: 0 };
   }
 
+  canSnap() {
+    return false;
+  }
+
   component(shape: StackShape) {
     return <HTMLContainer id={shape.id}>{shape.props.count}</HTMLContainer>;
   }
@@ -30,6 +34,10 @@ export class StackShapeUtil extends BaseBoxShapeUtil<StackShape> {
 export abstract class StackableShapeUtil<
   T extends TLBaseBoxShape,
 > extends BaseBoxShapeUtil<T> {
+  canSnap() {
+    return false;
+  }
+
   onTranslateStart(shape: T) {
     const bindings = this.editor.getBindingsFromShape(shape, "stack");
     this.editor.deleteBindings(bindings);

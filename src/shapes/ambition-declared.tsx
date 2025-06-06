@@ -19,6 +19,9 @@ export class AmbitionDeclaredMarkerShapeUtil extends BaseBoxShapeUtil<AmbitionDe
   canResize() {
     return false;
   }
+  canSnap() {
+    return false;
+  }
 
   component(shape: AmbitionDeclaredMarkerShape) {
     return (

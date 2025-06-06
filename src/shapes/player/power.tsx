@@ -17,6 +17,9 @@ export class PowerMarkerShapeUtil extends BaseBoxShapeUtil<PowerMarkerShape> {
   canResize() {
     return false;
   }
+  canSnap() {
+    return false;
+  }
 
   component(shape: PowerMarkerShape) {
     const color = colors[shape.props.slot];

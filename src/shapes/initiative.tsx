@@ -23,6 +23,9 @@ export class InitiativeMarkerShapeUtil extends BaseBoxShapeUtil<InitiativeMakerS
   canResize() {
     return false;
   }
+  canSnap() {
+    return false;
+  }
 
   component(shape: InitiativeMakerShape) {
     return (

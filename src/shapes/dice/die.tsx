@@ -32,6 +32,9 @@ export class DieShapeUtil extends BaseBoxShapeUtil<DieShape> {
   canResize() {
     return false;
   }
+  canSnap() {
+    return false;
+  }
 
   component(shape: DieShape) {
     const { face: index, kind } = shape.props;

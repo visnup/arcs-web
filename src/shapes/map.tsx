@@ -12,6 +12,9 @@ export class MapShapeUtil extends BaseBoxShapeUtil<MapShape> {
   getDefaultProps() {
     return { w, h };
   }
+  canSnap() {
+    return true;
+  }
 
   component(shape: MapShape) {
     return (

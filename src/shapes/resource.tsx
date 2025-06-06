@@ -27,6 +27,9 @@ export class ResourceShapeUtil extends BaseBoxShapeUtil<ResourceShape> {
   canResize() {
     return false;
   }
+  canSnap() {
+    return false;
+  }
 
   component(shape: ResourceShape) {
     const offset = resources.indexOf(shape.props.kind) * 25;
