@@ -7,7 +7,7 @@ const colors = Object.fromEntries(
   [..._colors.entries()].map(([i, color]) => [color, i]),
 );
 
-const aspect = 719 / 1005;
+const aspect = 585 / 816;
 export const w = 95;
 export const h = w / aspect;
 
