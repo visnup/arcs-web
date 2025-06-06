@@ -3,7 +3,7 @@ import { colors } from "./colors";
 import { StackableShapeUtil } from "../stack";
 
 const aspect = 314 / 125;
-export const w = 60;
+export const w = 50;
 export const h = w / aspect;
 // eslint-disable-next-line react-refresh/only-export-components
 const Path = (props: React.SVGProps<SVGPathElement>) => (

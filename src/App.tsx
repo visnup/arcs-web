@@ -71,7 +71,7 @@ export default function App() {
   });
 
   const onMount = useCallback<TLOnMountHandler>((editor) => {
-    if (window.location.search === "?new") setup(editor);
+    if (window.location.search.startsWith("?new")) setup(editor);
     let color = editor.user.getColor();
     if (!colors.includes(color)) {
       const others = editor.getCollaboratorsOnCurrentPage().map((u) => u.color);

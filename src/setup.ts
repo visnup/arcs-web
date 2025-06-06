@@ -97,8 +97,8 @@ export function setup(editor: Editor) {
       d3.range(0, 6).map((face) => ({
         id: createShapeId(`die-${kind}-${face}`),
         type: "die",
-        x: -230 - i * 60 + jitter(),
-        y: 120 + face * 50 + jitter(),
+        x: -230 - i * 40 + jitter(),
+        y: 140 + face * 40 + jitter(),
         props: { kind, face },
       })),
     ),

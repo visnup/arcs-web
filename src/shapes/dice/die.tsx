@@ -3,7 +3,7 @@ import assault from "./assault.jpg";
 import raid from "./raid.jpg";
 import skirmish from "./skirmish.jpg";
 
-export const w = 40;
+export const w = 28;
 export const h = w;
 
 type DieKind = "assault" | "raid" | "skirmish";
