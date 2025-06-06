@@ -6,6 +6,12 @@ import action from "./shapes/cards/action.jpg";
 import actionBack from "./shapes/cards/action-back.jpg";
 import bc from "./shapes/cards/bc.jpg";
 import bcBack from "./shapes/cards/bc-back.jpg";
+import leader from "./shapes/cards/leader.jpg";
+import leader2 from "./shapes/cards/leader-2.jpg";
+import leaderBack from "./shapes/cards/leader-back.jpg";
+import lore from "./shapes/cards/lore.jpg";
+import lore2 from "./shapes/cards/lore-2.jpg";
+import loreBack from "./shapes/cards/lore-back.jpg";
 import type { ShipShapeUtil } from "./shapes/player/ship";
 import type { AgentShapeUtil } from "./shapes/player/agent";
 import type { StarportShapeUtil } from "./shapes/player/building";
@@ -220,5 +226,45 @@ export function setup(editor: Editor) {
       x: 15 + (i % 2) * 15,
       y: bounds.maxY - 15 - Math.floor(i / 2) * 15,
     })),
+  );
+
+  // Leaders
+  editor.createShapes(
+    [leader, leader2].flatMap((frontUrl, i) =>
+      d3.range(0, 8).map((index) => ({
+        id: createShapeId(`leader-${8 * i + index}`),
+        type: "card",
+        x: bounds.w + 300,
+        y: 0,
+        props: {
+          w: 109,
+          h: (109 / 827) * 1417,
+          index,
+          rows: 2,
+          cols: 4,
+          faceUp: true,
+          frontUrl,
+          backUrl: leaderBack,
+        },
+      })),
+    ),
+  );
+  // Lore
+  editor.createShapes(
+    [lore, lore2].flatMap((frontUrl, i) =>
+      d3.range(0, 14).map((index) => ({
+        id: createShapeId(`lore-${14 * i + index}`),
+        type: "card",
+        x: bounds.w + 420,
+        y: 0,
+        props: {
+          index,
+          rows: 2,
+          faceUp: true,
+          frontUrl,
+          backUrl: loreBack,
+        },
+      })),
+    ),
   );
 }

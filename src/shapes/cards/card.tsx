@@ -58,7 +58,7 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
       ? holder.props.slot === colors[this.editor.user.getColor()]
       : shape.props.faceUp;
     if (faceUp) {
-      const { cols, rows, index, frontUrl } = shape.props;
+      const { w, h, cols, rows, index, frontUrl } = shape.props;
 
       const col = index % cols;
       const row = Math.floor(index / cols);
@@ -79,7 +79,7 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
         />
       );
     } else {
-      const { backUrl } = shape.props;
+      const { w, h, backUrl } = shape.props;
       return (
         <HTMLContainer
           id={shape.id}
@@ -100,7 +100,8 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
   }
 
   onTranslateStart(shape: CardShape) {
-    this.editor.bringToFront([shape]);
+    if (this.editor.getSelectedShapeIds().length === 1)
+      this.editor.bringToFront([shape]);
     this.editor.deleteBindings(
       this.editor.getBindingsFromShape(shape, "card-holder"),
     );
