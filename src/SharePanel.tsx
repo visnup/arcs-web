@@ -17,7 +17,12 @@ export const SharePanel = track(function SharePanel() {
         <button
           key={color}
           className="tlui-button"
-          onClick={() => editor.user.updateUserPreferences({ color })}
+          disabled={present.has(color) && color !== c}
+          onClick={() =>
+            editor.user.updateUserPreferences({
+              color: c !== color ? color : "#000000",
+            })
+          }
           style={{
             backgroundColor: color,
             width: 20,
