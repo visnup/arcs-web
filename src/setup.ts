@@ -15,6 +15,7 @@ import loreBack from "./shapes/cards/lore-back.jpg";
 import type { ShipShapeUtil } from "./shapes/player/ship";
 import type { AgentShapeUtil } from "./shapes/player/agent";
 import type { StarportShapeUtil } from "./shapes/player/building";
+import { blocks } from "./shapes/block";
 
 const jitter = () => Math.random() * 5;
 
@@ -266,5 +267,16 @@ export function setup(editor: Editor) {
         },
       })),
     ),
+  );
+
+  // Blocks
+  editor.createShapes(
+    Object.entries(blocks).map(([kind, { props }], i) => ({
+      id: createShapeId(`block-${kind}-1`),
+      type: "block",
+      x: bounds.w + 300,
+      y: 300 + i * 60,
+      props,
+    })),
   );
 }

@@ -14,6 +14,7 @@ const customShapes = [
   "agent",
   "ambition",
   "ambition-declared",
+  "block",
   "board",
   "card",
   "card-holder",
