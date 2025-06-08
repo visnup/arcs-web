@@ -36,4 +36,9 @@ export class AmbitionDeclaredMarkerShapeUtil extends BaseBoxShapeUtil<AmbitionDe
   indicator(shape: AmbitionDeclaredMarkerShape) {
     return this.editor.getShapeUtil("image").indicator(shape);
   }
+
+  onTranslateStart(shape: AmbitionDeclaredMarkerShape) {
+    if (this.editor.getSelectedShapeIds().length === 1)
+      this.editor.bringToFront([shape]);
+  }
 }
