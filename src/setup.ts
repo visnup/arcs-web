@@ -12,6 +12,9 @@ import leaderBack from "./shapes/cards/leader-back.jpg";
 import lore from "./shapes/cards/lore.jpg";
 import lore2 from "./shapes/cards/lore-2.jpg";
 import loreBack from "./shapes/cards/lore-back.jpg";
+import setup_ from "./shapes/cards/setup.jpg";
+import setupBack from "./shapes/cards/setup-back.jpg";
+
 import type { ShipShapeUtil } from "./shapes/player/ship";
 import type { AgentShapeUtil } from "./shapes/player/agent";
 import type { StarportShapeUtil } from "./shapes/player/building";
@@ -229,14 +232,46 @@ export function setup(editor: Editor) {
     })),
   );
 
+  // Setup
+  for (const players of [2, 3, 4])
+    editor.createShapes(
+      [0, 1, 2, 3].map((i) => ({
+        id: createShapeId(`setup-${players}-${i}`),
+        type: "card",
+        x: bounds.w + 200,
+        y: bounds.midY - 120 * (players - 1),
+        props: {
+          w: (95 / 585) * 816,
+          h: 95,
+          index: (players - 2) * 4 + i,
+          backIndex: (players - 2) * 4 + i,
+          rows: 3,
+          cols: 4,
+          frontUrl: setup_,
+          backUrl: setupBack,
+        },
+      })),
+    );
+
+  // Blocks
+  editor.createShapes(
+    Object.entries(blocks).map(([kind, { props }], i) => ({
+      id: createShapeId(`block-${kind}-1`),
+      type: "block",
+      x: bounds.w + 450 - props.w / 2,
+      y: bounds.midY - 100 - 60 * i,
+      props,
+    })),
+  );
+
   // Leaders
   editor.createShapes(
     [leader, leader2].flatMap((frontUrl, i) =>
       d3.range(0, 8).map((index) => ({
         id: createShapeId(`leader-${8 * i + index}`),
         type: "card",
-        x: bounds.w + 300,
-        y: 0,
+        x: bounds.w + 212.5,
+        y: bounds.midY + 20,
         props: {
           w: 109,
           h: (109 / 827) * 1417,
@@ -256,8 +291,8 @@ export function setup(editor: Editor) {
       d3.range(0, 14).map((index) => ({
         id: createShapeId(`lore-${14 * i + index}`),
         type: "card",
-        x: bounds.w + 420,
-        y: 30,
+        x: bounds.w + 400,
+        y: bounds.midY + 50,
         props: {
           index,
           rows: 2,
@@ -267,16 +302,5 @@ export function setup(editor: Editor) {
         },
       })),
     ),
-  );
-
-  // Blocks
-  editor.createShapes(
-    Object.entries(blocks).map(([kind, { props }], i) => ({
-      id: createShapeId(`block-${kind}-1`),
-      type: "block",
-      x: bounds.w + 350 - props.w / 2,
-      y: 300 + i * 60,
-      props,
-    })),
   );
 }

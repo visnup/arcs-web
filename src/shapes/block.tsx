@@ -9,9 +9,9 @@ import large from "./block-large.png";
 import small from "./block-small.png";
 
 export const blocks = {
-  circle: { props: { w: 47, h: 47, kind: "circle" as const }, url: circle },
   large: { props: { w: 145, h: 50, kind: "large" as const }, url: large },
   small: { props: { w: 70, h: 42, kind: "small" as const }, url: small },
+  circle: { props: { w: 47, h: 47, kind: "circle" as const }, url: circle },
 };
 type BlockKind = keyof typeof blocks;
 type BlockShape = TLBaseShape<

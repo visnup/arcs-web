@@ -20,6 +20,7 @@ export type CardShape = TLBaseShape<
     rows: number;
     faceUp: boolean;
     index: number;
+    backIndex?: number;
     frontUrl: string;
     backUrl: string;
   }
@@ -57,42 +58,46 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
     const faceUp = holder
       ? holder.props.slot === colors[this.editor.user.getColor()]
       : shape.props.faceUp;
-    if (faceUp) {
-      const { w, h, cols, rows, index, frontUrl } = shape.props;
 
+    const { w, h, cols, rows, index, backIndex, frontUrl, backUrl } =
+      shape.props;
+
+    const sprite = (index: number, url: string) => {
       const col = index % cols;
       const row = Math.floor(index / cols);
       const bgX = col * (100 / (cols - 1));
       const bgY = row * (100 / (rows - 1));
 
-      return (
-        <HTMLContainer
-          id={shape.id}
-          style={{
-            backgroundImage: `url(${frontUrl})`,
-            backgroundSize: `${cols * w}px ${rows * h}px`,
-            backgroundPosition: `${bgX}% ${bgY}%`,
-            width: w,
-            height: h,
-            borderRadius: 5,
-          }}
-        />
-      );
-    } else {
-      const { w, h, backUrl } = shape.props;
-      return (
-        <HTMLContainer
-          id={shape.id}
-          style={{
-            backgroundImage: `url(${backUrl})`,
-            backgroundSize: `${w}px ${h}px`,
-            width: w,
-            height: h,
-            borderRadius: 5,
-          }}
-        />
-      );
-    }
+      return {
+        backgroundImage: `url(${url})`,
+        backgroundSize: `${cols * w}px ${rows * h}px`,
+        backgroundPosition: `${bgX}% ${bgY}%`,
+        width: w,
+        height: h,
+        borderRadius: 5,
+      };
+    };
+
+    const single = (url: string) => ({
+      backgroundImage: `url(${url})`,
+      backgroundSize: `${w}px ${h}px`,
+      width: w,
+      height: h,
+      borderRadius: 5,
+    });
+
+    return (
+      <HTMLContainer
+        id={shape.id}
+        style={
+          faceUp
+            ? sprite(index, frontUrl)
+            : backIndex !== undefined
+              ? sprite(backIndex, backUrl)
+              : single(backUrl)
+        }
+      />
+    );
   }
 
   indicator(shape: CardShape) {
