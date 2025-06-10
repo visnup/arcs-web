@@ -94,7 +94,7 @@ export function setup(editor: Editor) {
       rotation: -Math.PI / 2,
       props: {
         index,
-        rows: 7,
+        rows: 4,
         frontUrl: action,
         backUrl: actionBack,
       },
