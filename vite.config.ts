@@ -10,4 +10,7 @@ export default defineConfig({
       process.env.TLDRAW_WORKER_URL ?? "http://localhost:5172",
     ),
   },
+  vercel: {
+    expiration: 86400,
+  },
 });
