@@ -29,11 +29,7 @@ export class ShipShapeUtil extends StackableShapeUtil<ShipShape> {
   component(shape: ShipShape) {
     const color = colors[shape.props.slot];
     return (
-      <SVGContainer
-        id={shape.id}
-        viewBox="0 0 314 125"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <SVGContainer id={shape.id} viewBox="0 0 314 125">
         <Path fill={color} stroke="hsl(0, 0%, 0%, 0.2)" strokeWidth="0.5" />
       </SVGContainer>
     );

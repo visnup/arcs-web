@@ -29,11 +29,7 @@ export class InitiativeMarkerShapeUtil extends BaseBoxShapeUtil<InitiativeMakerS
 
   component(shape: InitiativeMakerShape) {
     return (
-      <SVGContainer
-        id={shape.id}
-        viewBox="0 0 104 318"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <SVGContainer id={shape.id} viewBox="0 0 104 318">
         <Path fill="#a5a7aa" stroke="hsl(0, 0%, 0%, 0.2)" />
       </SVGContainer>
     );

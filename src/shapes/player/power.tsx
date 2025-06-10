@@ -24,7 +24,7 @@ export class PowerMarkerShapeUtil extends BaseBoxShapeUtil<PowerMarkerShape> {
   component(shape: PowerMarkerShape) {
     const color = colors[shape.props.slot];
     return (
-      <SVGContainer id={shape.id} xmlns="http://www.w3.org/2000/svg">
+      <SVGContainer id={shape.id}>
         <rect fill={color} width={shape.props.w} height={shape.props.h} />
       </SVGContainer>
     );
