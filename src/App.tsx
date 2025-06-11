@@ -1,100 +1,15 @@
-import { useSync } from "@tldraw/sync";
-import { useCallback } from "react";
-import {
-  defaultBindingUtils,
-  defaultShapeUtils,
-  Tldraw,
-  type TLComponents,
-  type TLOnMountHandler,
-  type TLUiOverrides,
-} from "tldraw";
-import "tldraw/tldraw.css";
-import { flip } from "./actions/flip";
-import { rotate } from "./actions/rotate";
-import { primary } from "./actions/primary";
-import { multiplayerAssetStore } from "./multiplayerAssetStore";
-import { setup } from "./setup";
-import { customBindingUtils, customShapeUtils } from "./shapes";
-import { group } from "./actions/group";
-import { SharePanel } from "./SharePanel";
-import { colors } from "./shapes/player/colors";
-
-const WORKER_URL = process.env.TLDRAW_WORKER_URL;
-const shapeUtils = [...defaultShapeUtils, ...customShapeUtils];
-const bindingUtils = [...defaultBindingUtils, ...customBindingUtils];
-
-const components: TLComponents = {
-  SelectionBackground: null,
-  SelectionForeground: null,
-  SharePanel: SharePanel,
-  StylePanel: null,
-  Toolbar: null,
-};
-
-const overrides: TLUiOverrides = {
-  actions: (editor, actions) => {
-    // Custom actions
-    const custom = {
-      ...flip(editor),
-      ...group(editor),
-      ...primary(editor),
-      ...rotate(editor),
-    };
-
-    // Remove conflicting keys
-    const kbd = new Set(Object.values(custom).map((a) => a.kbd));
-    for (const v of Object.values(actions)) if (kbd.has(v.kbd)) delete v.kbd;
-
-    return {
-      ...actions,
-      ...custom,
-    };
-  },
-  tools: (_editor, tools) => {
-    // Remove tools
-    delete tools.arrow;
-    delete tools.ellipse;
-    delete tools.eraser;
-    delete tools.frame;
-    delete tools.line;
-    delete tools.rectangle;
-    return tools;
-  },
-};
+import { nanoid } from "nanoid/non-secure";
+import Room from "./Room";
 
 export default function App() {
-  const store = useSync({
-    uri: `${WORKER_URL}/connect/1`,
-    assets: multiplayerAssetStore,
-    shapeUtils,
-    bindingUtils,
-  });
+  const url = new URL(window.location.toString());
+  const room = url.searchParams.get("room");
 
-  const onMount = useCallback<TLOnMountHandler>((editor) => {
-    const url = new URL(window.location.toString());
-    if (url.searchParams.has("new")) setup(editor);
-    let color = editor.user.getColor();
-    if (!colors.includes(color)) {
-      const others = editor.getCollaboratorsOnCurrentPage().map((u) => u.color);
-      color = colors.find((c) => !others.includes(c)) ?? colors[0];
-    }
-    editor.user.updateUserPreferences({
-      color,
-      colorScheme: "dark",
-    });
-  }, []);
+  if (!room) {
+    url.searchParams.set("room", nanoid());
+    window.location.href = url.toString();
+    return null;
+  }
 
-  return (
-    <div style={{ position: "fixed", inset: 0 }}>
-      <Tldraw
-        store={store}
-        shapeUtils={shapeUtils}
-        bindingUtils={bindingUtils}
-        components={components}
-        overrides={overrides}
-        onMount={onMount}
-        deepLinks
-      />
-    </div>
-  );
+  return <Room room={room.toLowerCase()} />;
 }

@@ -20,6 +20,7 @@
     "d3-array": "^3.2.4",
     "itty-router": "^5.0.18",
     "lodash.throttle": "^4.1.1",
+    "nanoid": "^5.1.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tldraw": "^3.13.1"
