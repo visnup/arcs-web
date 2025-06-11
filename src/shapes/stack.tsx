@@ -23,7 +23,11 @@ export class StackShapeUtil extends BaseBoxShapeUtil<StackShape> {
   }
 
   component(shape: StackShape) {
-    return <HTMLContainer id={shape.id}>{shape.props.count}</HTMLContainer>;
+    return (
+      <HTMLContainer id={shape.id} style={{ fontSize: 20 }}>
+        {shape.props.count}
+      </HTMLContainer>
+    );
   }
 
   indicator() {
@@ -105,7 +109,7 @@ export class StackBindingUtil extends BindingUtil<StackBinding> {
       id: binding.toId,
       type: "stack",
       x: bounds.maxX + 5,
-      y: bounds.midY - 10,
+      y: bounds.midY - 14,
       props: { count: length },
     });
   }
