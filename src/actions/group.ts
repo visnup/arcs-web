@@ -1,5 +1,6 @@
 import { rollups } from "d3-array";
 import type { Editor, TLUiActionsContextType } from "tldraw";
+import { getHoveredOrSelectedShapes } from "./getHoveredOrSelectedShapes";
 
 export const group: (editor: Editor) => TLUiActionsContextType = (editor) => ({
   group: {
@@ -7,10 +8,7 @@ export const group: (editor: Editor) => TLUiActionsContextType = (editor) => ({
     label: "Group",
     kbd: "g",
     onSelect: () => {
-      const shapes = [
-        editor.getHoveredShape(),
-        ...editor.getSelectedShapes(),
-      ].filter((s) => s !== undefined);
+      const shapes = getHoveredOrSelectedShapes(editor);
       if (!shapes.length) return;
       const most = JSON.parse(
         rollups(
