@@ -1,5 +1,5 @@
 import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
-import src from "./board.png";
+import src from "./board.webp";
 import { colors } from "./colors";
 
 const aspect = 2579 / 1033;

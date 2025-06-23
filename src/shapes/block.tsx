@@ -4,9 +4,9 @@ import {
   HTMLContainer,
   type TLBaseShape,
 } from "tldraw";
-import circle from "./block-circle.jpg";
-import large from "./block-large.png";
-import small from "./block-small.png";
+import circle from "./block-circle.webp";
+import large from "./block-large.webp";
+import small from "./block-small.webp";
 
 export const blocks = {
   large: { props: { w: 145, h: 50, kind: "large" as const }, url: large },

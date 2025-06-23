@@ -1,6 +1,6 @@
 import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
-import ambition from "./ambition.jpg";
-import ambitionBack from "./ambition-back.jpg";
+import ambition from "./ambition.webp";
+import ambitionBack from "./ambition-back.webp";
 
 export const w = 50;
 export const h = w;

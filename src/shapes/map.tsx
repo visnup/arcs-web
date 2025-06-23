@@ -1,5 +1,5 @@
 import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
-import src from "./map.jpg";
+import src from "./map.webp";
 
 const aspect = 6963 / 3720;
 const w = 1200;

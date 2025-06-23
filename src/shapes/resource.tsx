@@ -1,5 +1,5 @@
 import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
-import url from "./resources.jpg";
+import url from "./resources.webp";
 
 const aspect = 1;
 export const w = 44;

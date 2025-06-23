@@ -1,7 +1,7 @@
 import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
-import assault from "./assault.jpg";
-import raid from "./raid.jpg";
-import skirmish from "./skirmish.jpg";
+import assault from "./assault.webp";
+import raid from "./raid.webp";
+import skirmish from "./skirmish.webp";
 
 export const w = 28;
 export const h = w;

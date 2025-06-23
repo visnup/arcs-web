@@ -1,9 +1,9 @@
 import { HTMLContainer, type TLBaseShape } from "tldraw";
-import city from "./city.jpg";
-import cityDamaged from "./city-dmg.jpg";
-import starport from "./starport.jpg";
-import starportDamaged from "./starport-dmg.jpg";
-import mask from "./building-mask.png";
+import city from "./city.webp";
+import cityDamaged from "./city-dmg.webp";
+import starport from "./starport.webp";
+import starportDamaged from "./starport-dmg.webp";
+import mask from "./building-mask.webp";
 import { StackableShapeUtil } from "../stack";
 
 const aspect = 150 / 136;

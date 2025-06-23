@@ -1,5 +1,5 @@
 import { BaseBoxShapeUtil, type TLBaseShape } from "tldraw";
-import url from "./ambition-declared.jpg";
+import url from "./ambition-declared.webp";
 
 const aspect = 500 / 126;
 export const w = 95;
