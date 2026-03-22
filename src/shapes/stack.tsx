@@ -47,7 +47,9 @@ export abstract class StackableShapeUtil<
 
   stack(shape: T) {
     if (this.editor.getBindingsFromShape(shape, "stack").length) return;
-    const { center } = this.editor.getShapeGeometry(shape);
+    const bounds = this.editor.getShapePageBounds(shape);
+    if (!bounds) return;
+    const center = { x: bounds.midX, y: bounds.midY };
     const shapes = this.editor
       .getShapesAtPoint(center, { hitInside: true })
       .filter((s) => s !== shape && s.type === shape.type);
@@ -85,14 +87,12 @@ export class StackBindingUtil extends BindingUtil<StackBinding> {
   }
 
   getFromBounds(binding: StackBinding) {
-    const bounds = this.editor.getBindingsToShape(binding.toId, "stack").map(
-      (b) =>
-        this.editor.getShapeGeometry(b.fromId, {
-          context: String(Math.random()), // ignore cache
-        }).bounds!,
-    );
+    const bounds = this.editor
+      .getBindingsToShape(binding.toId, "stack")
+      .map((b) => this.editor.getShapePageBounds(b.fromId))
+      .filter((b) => b !== undefined);
     return {
-      bounds: bounds.reduce((u, bounds) => u.union(bounds)),
+      bounds: bounds.reduce((u, b) => u.union(b)),
       length: bounds.length,
     };
   }
