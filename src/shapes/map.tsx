@@ -1,4 +1,5 @@
-import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
+import { type TLBaseShape } from "@tldraw/tlschema";
+import { BaseBoxShapeUtil, HTMLContainer, type TLImageShape } from "tldraw";
 import src from "./map.webp";
 
 const aspect = 6963 / 3720;
@@ -22,7 +23,7 @@ export class MapShapeUtil extends BaseBoxShapeUtil<MapShape> {
   }
 
   indicator(shape: MapShape) {
-    return this.editor.getShapeUtil("image").indicator(shape);
+    return this.editor.getShapeUtil("image").indicator(shape as unknown as TLImageShape);
   }
 
   getBoundsSnapGeometry() {

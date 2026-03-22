@@ -1,4 +1,5 @@
-import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
+import { type TLBaseShape } from "@tldraw/tlschema";
+import { BaseBoxShapeUtil, HTMLContainer, type TLImageShape } from "tldraw";
 import assault from "./assault.webp";
 import raid from "./raid.webp";
 import skirmish from "./skirmish.webp";
@@ -57,7 +58,7 @@ export class DieShapeUtil extends BaseBoxShapeUtil<DieShape> {
   }
 
   indicator(shape: DieShape) {
-    return this.editor.getShapeUtil("image").indicator(shape);
+    return this.editor.getShapeUtil("image").indicator(shape as unknown as TLImageShape);
   }
 
   onPrimaryAction(shapes: DieShape[]) {

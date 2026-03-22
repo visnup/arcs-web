@@ -1,7 +1,7 @@
 import { useSync } from "@tldraw/sync";
 import { useCallback } from "react";
+import { createShapeId } from "@tldraw/tlschema";
 import {
-  createShapeId,
   defaultBindingUtils,
   defaultShapeUtils,
   Tldraw,

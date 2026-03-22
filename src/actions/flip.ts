@@ -1,4 +1,5 @@
-import type { Editor, TLUiActionsContextType, TLUnknownShape } from "tldraw";
+import type { TLShape } from "@tldraw/tlschema";
+import type { Editor, TLUiActionsContextType } from "tldraw";
 import { getHoveredOrSelectedShapes } from "./getHoveredOrSelectedShapes";
 
 export const flip: (editor: Editor) => TLUiActionsContextType = (editor) => ({
@@ -8,7 +9,7 @@ export const flip: (editor: Editor) => TLUiActionsContextType = (editor) => ({
     kbd: "f",
     onSelect: () => {
       const shapes = getHoveredOrSelectedShapes(editor).filter(
-        (s): s is TLUnknownShape & { props: { faceUp: boolean } } =>
+        (s): s is TLShape & { props: { faceUp: boolean } } =>
           "faceUp" in s.props,
       );
       editor.run(() => {
@@ -17,7 +18,7 @@ export const flip: (editor: Editor) => TLUiActionsContextType = (editor) => ({
             id: s.id,
             type: s.type,
             props: { faceUp: !s.props.faceUp },
-          })),
+          })) as Parameters<typeof editor.updateShapes>[0],
         );
         if (shapes.length <= 1) return;
         const ids = new Set(shapes.map((s) => s.id));

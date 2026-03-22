@@ -1,5 +1,6 @@
 import { shuffle } from "d3-array";
-import { BaseBoxShapeUtil, HTMLContainer, Vec, type TLBaseShape } from "tldraw";
+import { type TLBaseShape } from "@tldraw/tlschema";
+import { BaseBoxShapeUtil, HTMLContainer, Vec, type TLImageShape } from "tldraw";
 import { colors as _colors } from "../player/colors";
 import type { CardHolderShape } from "./card-holder";
 
@@ -101,7 +102,7 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
   }
 
   indicator(shape: CardShape) {
-    return this.editor.getShapeUtil("image").indicator(shape);
+    return this.editor.getShapeUtil("image").indicator(shape as unknown as TLImageShape);
   }
 
   onTranslateStart(shape: CardShape) {
@@ -113,13 +114,18 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
   }
 
   onTranslateEnd(_initial: CardShape, shape: CardShape) {
-    const { center } = this.editor.getShapePageGeometry(shape);
+    const pageBounds = this.editor.getShapePageBounds(shape);
+    const center = pageBounds
+      ? { x: pageBounds.midX, y: pageBounds.midY }
+      : { x: shape.x, y: shape.y };
     const below = this.editor
       .getShapesAtPoint(center, { hitInside: true })
       .find((s) => s !== shape && s.type === shape.type) as CardShape;
     if (!below) return;
-    const { center: p } = this.editor.getShapePageGeometry(below);
-    if (Vec.Dist(center, p) <= 40)
+    const belowBounds = this.editor.getShapePageBounds(below);
+    if (!belowBounds) return;
+    const belowCenter = { x: belowBounds.midX, y: belowBounds.midY };
+    if (Vec.Dist(center, belowCenter) <= 40)
       this.editor.updateShape({
         id: shape.id,
         type: shape.type,

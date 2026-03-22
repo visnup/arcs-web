@@ -1,4 +1,5 @@
-import { BaseBoxShapeUtil, SVGContainer, type TLBaseShape } from "tldraw";
+import { type TLBaseShape } from "@tldraw/tlschema";
+import { BaseBoxShapeUtil, SVGContainer } from "tldraw";
 import { colors } from "./colors";
 
 export const w = 12;

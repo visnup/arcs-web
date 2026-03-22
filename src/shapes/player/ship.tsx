@@ -1,4 +1,5 @@
-import { SVGContainer, type TLBaseShape } from "tldraw";
+import { type TLBaseShape } from "@tldraw/tlschema";
+import { SVGContainer } from "tldraw";
 import { colors } from "./colors";
 import { StackableShapeUtil } from "../stack";
 

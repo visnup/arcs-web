@@ -1,4 +1,5 @@
-import { createShapeId, Editor } from "tldraw";
+import { createShapeId } from "@tldraw/tlschema";
+import { Editor } from "tldraw";
 import { w, h } from "./shapes/player/board";
 import * as d3 from "d3-array";
 import { resources } from "./shapes/resource";
@@ -103,7 +104,7 @@ export function setup(editor: Editor) {
 
   // Dice
   editor.createShapes(
-    ["assault", "raid", "skirmish"].flatMap((kind, i) =>
+    (["assault", "raid", "skirmish"] as const).flatMap((kind, i) =>
       d3.range(0, 6).map((face) => ({
         id: createShapeId(`die-${kind}-${face}`),
         type: "die",
@@ -148,7 +149,6 @@ export function setup(editor: Editor) {
         type: "card-holder",
         x: positions[slot].x,
         y: positions[slot].y + h * (slot <= 1 ? -1 : 1),
-        isLocked: true,
         props: { w, h, slot },
       })),
     )

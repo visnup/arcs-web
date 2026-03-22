@@ -1,9 +1,5 @@
-import {
-  BaseBoxShapeUtil,
-  createShapeId,
-  HTMLContainer,
-  type TLBaseShape,
-} from "tldraw";
+import { createShapeId, type TLBaseShape } from "@tldraw/tlschema";
+import { BaseBoxShapeUtil, HTMLContainer, type TLImageShape } from "tldraw";
 import circle from "./block-circle.webp";
 import large from "./block-large.webp";
 import small from "./block-small.webp";
@@ -54,7 +50,7 @@ export class BlockShapeUtil extends BaseBoxShapeUtil<BlockShape> {
         cy={shape.props.h / 2}
       />
     ) : (
-      this.editor.getShapeUtil("image").indicator(shape)
+      this.editor.getShapeUtil("image").indicator(shape as unknown as TLImageShape)
     );
   }
 

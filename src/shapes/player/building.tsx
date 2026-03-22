@@ -1,4 +1,5 @@
-import { HTMLContainer, type TLBaseShape } from "tldraw";
+import { type TLBaseShape } from "@tldraw/tlschema";
+import { HTMLContainer } from "tldraw";
 import city from "./city.webp";
 import cityDamaged from "./city-dmg.webp";
 import starport from "./starport.webp";

@@ -15,9 +15,9 @@
   },
   "dependencies": {
     "@cloudflare/types": "^7.0.0",
-    "@tldraw/sync": "^3.13.1",
-    "@tldraw/sync-core": "^3.13.1",
-    "@tldraw/tlschema": "^3.13.1",
+    "@tldraw/sync": "^4.5.3",
+    "@tldraw/sync-core": "^4.5.3",
+    "@tldraw/tlschema": "^4.5.3",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "cloudflare-workers-unfurl": "^0.0.8",
@@ -27,7 +27,7 @@
     "nanoid": "^5.1.7",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "tldraw": "^3.13.1"
+    "tldraw": "^4.5.3"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260317.1",

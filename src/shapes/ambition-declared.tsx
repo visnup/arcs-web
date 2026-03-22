@@ -1,4 +1,5 @@
-import { BaseBoxShapeUtil, type TLBaseShape } from "tldraw";
+import { type TLBaseShape } from "@tldraw/tlschema";
+import { BaseBoxShapeUtil, type TLImageShape } from "tldraw";
 import url from "./ambition-declared.webp";
 
 const aspect = 500 / 126;
@@ -34,7 +35,7 @@ export class AmbitionDeclaredMarkerShapeUtil extends BaseBoxShapeUtil<AmbitionDe
   }
 
   indicator(shape: AmbitionDeclaredMarkerShape) {
-    return this.editor.getShapeUtil("image").indicator(shape);
+    return this.editor.getShapeUtil("image").indicator(shape as unknown as TLImageShape);
   }
 
   onTranslateStart(shape: AmbitionDeclaredMarkerShape) {

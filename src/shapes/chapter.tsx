@@ -1,8 +1,9 @@
-import { BaseBoxShapeUtil, SVGContainer, type TLBaseShape } from "tldraw";
+import { type TLBaseShape } from "@tldraw/tlschema";
+import { BaseBoxShapeUtil, SVGContainer } from "tldraw";
 
 export const w = 28;
 
-type ChapterMarkerShape = TLBaseShape<"power", { w: number; h: number }>;
+type ChapterMarkerShape = TLBaseShape<"chapter", { w: number; h: number }>;
 export class ChapterMarkerShapeUtil extends BaseBoxShapeUtil<ChapterMarkerShape> {
   static override type = "chapter" as const;
 

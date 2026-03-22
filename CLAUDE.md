@@ -11,9 +11,11 @@ npm run dev:worker   # Worker only
 npm run build        # tsc -b && vite build
 npm run lint         # ESLint
 npm run build:images # Rebuild processed images (src/images.ts using sharp)
+pnpm test            # Run Playwright e2e tests (requires dev server running)
+pnpm test --grep "test name"  # Run a single test
 ```
 
-No test framework is configured.
+Tests use Playwright (`tests/`) against the running dev server at `http://localhost:5173`. Fixtures in `tests/fixtures.ts` navigate to `/?new` for a fresh room.
 
 ## Architecture
 

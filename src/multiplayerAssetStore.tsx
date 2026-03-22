@@ -1,4 +1,5 @@
-import { type TLAssetStore, uniqueId } from "tldraw";
+import { type TLAssetStore } from "@tldraw/tlschema";
+import { uniqueId } from "tldraw";
 
 const WORKER_URL = process.env.TLDRAW_WORKER_URL;
 

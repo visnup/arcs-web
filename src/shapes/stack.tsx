@@ -1,13 +1,11 @@
+import { createShapeId, type TLBaseBinding, type TLBaseShape } from "@tldraw/tlschema";
 import {
   BaseBoxShapeUtil,
   BindingUtil,
-  createShapeId,
   HTMLContainer,
   type BindingOnCreateOptions,
   type BindingOnDeleteOptions,
-  type TLBaseBinding,
   type TLBaseBoxShape,
-  type TLBaseShape,
 } from "tldraw";
 
 type StackShape = TLBaseShape<"stack", { w: number; h: number; count: number }>;
@@ -53,7 +51,7 @@ export abstract class StackableShapeUtil<
 
   stack(shape: T) {
     if (this.editor.getBindingsFromShape(shape, "stack").length) return;
-    const { center } = this.editor.getShapePageGeometry(shape);
+    const { center } = this.editor.getShapeGeometry(shape);
     const shapes = this.editor
       .getShapesAtPoint(center, { hitInside: true })
       .filter((s) => s !== shape && s.type === shape.type);
@@ -93,7 +91,7 @@ export class StackBindingUtil extends BindingUtil<StackBinding> {
   getFromBounds(binding: StackBinding) {
     const bounds = this.editor.getBindingsToShape(binding.toId, "stack").map(
       (b) =>
-        this.editor.getShapePageGeometry(b.fromId, {
+        this.editor.getShapeGeometry(b.fromId, {
           context: String(Math.random()), // ignore cache
         }).bounds!,
     );

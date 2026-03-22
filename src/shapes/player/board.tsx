@@ -1,4 +1,5 @@
-import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
+import { type TLBaseShape } from "@tldraw/tlschema";
+import { BaseBoxShapeUtil, HTMLContainer, type TLImageShape } from "tldraw";
 import src from "./board.webp";
 import { colors } from "./colors";
 
@@ -31,6 +32,6 @@ export class BoardShapeUtil extends BaseBoxShapeUtil<BoardShape> {
   }
 
   indicator(shape: BoardShape) {
-    return this.editor.getShapeUtil("image").indicator(shape);
+    return this.editor.getShapeUtil("image").indicator(shape as unknown as TLImageShape);
   }
 }

@@ -1,12 +1,11 @@
+import { type TLBaseBinding, type TLBaseShape, type TLShape } from "@tldraw/tlschema";
 import {
   BaseBoxShapeUtil,
   BindingUtil,
   HTMLContainer,
   type BindingOnCreateOptions,
   type BindingOnDeleteOptions,
-  type TLBaseBinding,
-  type TLBaseShape,
-  type TLShape,
+  type TLImageShape,
 } from "tldraw";
 import { type CardShape } from "./card";
 
@@ -21,8 +20,8 @@ export class CardHolderShapeUtil extends BaseBoxShapeUtil<CardHolderShape> {
     return { w: 0, h: 0 };
   }
 
-  canDropShapes(_shape: CardHolderShape, shapes: TLShape[]) {
-    return shapes.every((s) => s.type === "card");
+  canSelect() {
+    return false;
   }
   canSnap() {
     return false;
@@ -38,7 +37,7 @@ export class CardHolderShapeUtil extends BaseBoxShapeUtil<CardHolderShape> {
   }
 
   indicator(shape: CardHolderShape) {
-    return this.editor.getShapeUtil("image").indicator(shape);
+    return this.editor.getShapeUtil("image").indicator(shape as unknown as TLImageShape);
   }
 
   onDropShapesOver(shape: CardHolderShape, shapes: TLShape[]) {
@@ -91,18 +90,16 @@ export class CardHolderBindingUtil extends BindingUtil<CardHolderBinding> {
     const w = bounds.reduce((sum, b) => sum + b.w, 0);
     const n = cards.length - 1;
     const overlap = w > holder.w ? (w - holder.w) / n : 10;
-    this.editor.run(() => {
-      let x =
-        holder.x + (holder.w - w + overlap * n) / 2 - bounds[0].w + overlap;
-      this.editor.updateShapes(
-        cards.map((c, i) => ({
-          id: c,
-          type: "card",
-          x: (x += bounds[i].w - overlap),
-          y: holder.y + (holder.h - bounds[i].h) / 2,
-        })),
-      );
-      for (const c of cards) this.editor.bringToFront([c]);
-    });
+    let x =
+      holder.x + (holder.w - w + overlap * n) / 2 - bounds[0].w + overlap;
+    this.editor.updateShapes(
+      cards.map((c, i) => ({
+        id: c,
+        type: "card" as const,
+        x: (x += bounds[i].w - overlap),
+        y: holder.y + (holder.h - bounds[i].h) / 2,
+      })),
+    );
+    for (const c of cards) this.editor.bringToFront([c]);
   }
 }

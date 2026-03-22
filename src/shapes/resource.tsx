@@ -1,4 +1,5 @@
-import { BaseBoxShapeUtil, HTMLContainer, type TLBaseShape } from "tldraw";
+import { type TLBaseShape } from "@tldraw/tlschema";
+import { BaseBoxShapeUtil, HTMLContainer } from "tldraw";
 import url from "./resources.webp";
 
 const aspect = 1;
