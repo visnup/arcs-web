@@ -19,6 +19,7 @@ import { setup } from "./setup";
 import { customBindingUtils, customShapeUtils } from "./shapes";
 import { colors } from "./shapes/player/colors";
 import { SharePanel } from "./SharePanel";
+import { CardPreview } from "./CardPreview";
 
 const WORKER_URL = process.env.TLDRAW_WORKER_URL;
 const shapeUtils = [...defaultShapeUtils, ...customShapeUtils];
@@ -30,6 +31,7 @@ const components: TLComponents = {
   SharePanel: SharePanel,
   StylePanel: null,
   Toolbar: null,
+  InFrontOfTheCanvas: CardPreview,
 };
 
 const overrides: TLUiOverrides = {

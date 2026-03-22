@@ -18,7 +18,7 @@ type DieShape = TLBaseShape<
     kind: DieKind;
   }
 >;
-const urls: Record<DieKind, string> = { assault, raid, skirmish };
+export const urls: Record<DieKind, string> = { assault, raid, skirmish };
 export class DieShapeUtil extends GameShapeUtil<DieShape> {
   static override type = "die";
 
