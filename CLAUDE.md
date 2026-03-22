@@ -46,15 +46,22 @@ Worker URL defaults to `http://localhost:5172` in dev; set `TLDRAW_WORKER_URL` e
 
 ### Custom Shapes (`src/shapes/`)
 
-18 custom tldraw shape types organized by game concept:
+16 custom tldraw shape types:
 
 - **Player pieces** (`player/`): `agent`, `ship`, `board`, `city`, `starport`, `power`
-- **Game mechanics**: `card`, `cardHolder`, `die`, `initiative`, `block`, `resource`, `stack`
-- **Campaign/story**: `ambition`, `ambitionDeclared`, `chapter`, `map`
+- **Game mechanics**: `card`, `card-holder`, `die`, `initiative`, `block`, `resource`, `stack`
+- **Campaign/story**: `ambition`, `ambition-declared`, `chapter`, `map`
 
-Each shape follows the tldraw pattern: a `*ShapeUtil` class (geometry, rendering, behavior) exported from `src/shapes/index.ts` alongside its migration record.
+Each shape is a `*ShapeUtil` class exported from `src/shapes/index.ts` alongside its migration record.
 
-Two custom bindings: `CardHolderBinding` (cards snap to card holder shapes) and `StackBinding` (shapes stack together).
+**Base class hierarchy:**
+```
+BaseBoxShapeUtil (tldraw)
+  └── GameShapeUtil (game.tsx) — canSnap: false, canResize: false, default rect indicator
+        └── StackableShapeUtil (stack.tsx) — adds auto-stack-on-drop behavior
+```
+
+Two custom bindings: `CardHolderBinding` (cards snap to and auto-layout within card holders) and `StackBinding` (same-type stackable pieces group into a stack shape showing count).
 
 ### Data Flow
 
