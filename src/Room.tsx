@@ -76,6 +76,7 @@ export default function Room({ room }: RoomProps) {
   });
 
   const onMount = useCallback<TLOnMountHandler>((editor) => {
+    if (import.meta.env.DEV) (window as any).__editor = editor;
     const map = editor.getShape(createShapeId("map"));
     const url = new URL(window.location.toString());
     if (!map || url.searchParams.has("new")) setup(editor);
