@@ -1,10 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { test as base, type Locator, type Page } from "@playwright/test";
 
+type ShapeInfo = { id: string; type: string; x: number; y: number };
+
 type Fixtures = {
   page: Page;
   shape: (id: string) => Locator;
   drag: (from: Locator, to: Locator) => Promise<void>;
+  topShape: (locator: Locator) => Promise<ShapeInfo | null>;
 };
 
 async function drag(
@@ -34,6 +37,18 @@ export const test = base.extend<Fixtures>({
   },
   shape: async ({ page }, use) => {
     await use((id) => page.locator(`[id="shape:${id}"]`));
+  },
+  topShape: async ({ page }, use) => {
+    await use(async (locator: Locator) => {
+      const box = await locator.boundingBox();
+      const cx = box!.x + box!.width / 2;
+      const cy = box!.y + box!.height / 2;
+      return page.evaluate(({ cx, cy }) => {
+        const editor = (window as any).__editor;
+        const hit = editor.getShapeAtPoint(editor.screenToPage({ x: cx, y: cy }));
+        return hit ? { id: hit.id, type: hit.type, x: hit.x, y: hit.y } : null;
+      }, { cx, cy });
+    });
   },
   drag: async ({ page }, use) => {
     await use(async (from: Locator, to: Locator) => {
