@@ -9,13 +9,13 @@ Tight, concise, clever. Prefer short, apt, one-word variables over multi-word de
 ## Commands
 
 ```bash
-npm run dev          # Run client (Vite on :5173) and worker (Wrangler on :5172) concurrently
-npm run dev:client   # Client only
-npm run dev:worker   # Worker only
-npm run build        # tsc -b && vite build
-npm run lint         # ESLint
-npm run build:images # Rebuild processed images (src/images.ts using sharp)
-pnpm test            # Run Playwright e2e tests (requires dev server running)
+pnpm dev          # Run client (Vite on :5173) and worker (Wrangler on :5172) concurrently
+pnpm dev:client   # Client only
+pnpm dev:worker   # Worker only
+pnpm build        # tsc -b && vite build
+pnpm build:images # Rebuild processed images (src/images.ts using sharp)
+pnpm lint         # ESLint
+pnpm test         # Run Playwright e2e tests (requires dev server running)
 pnpm test --grep "test name"  # Run a single test
 ```
 
