@@ -186,7 +186,7 @@ export function setup(editor: Editor) {
     ),
   );
   for (const s of slots)
-    (editor.getShapeUtil("starport") as StarportShapeUtil).stack(
+    editor.getShapeUtil<StarportShapeUtil>("starport").stack(
       editor.getShape(createShapeId(`starport-${s}-4`))!,
     );
   // Ships
@@ -202,7 +202,7 @@ export function setup(editor: Editor) {
     ),
   );
   for (const s of slots)
-    (editor.getShapeUtil("ship") as ShipShapeUtil).stack(
+    editor.getShapeUtil<ShipShapeUtil>("ship").stack(
       editor.getShape(createShapeId(`ship-${s}-14`))!,
     );
   // Agents
@@ -218,7 +218,7 @@ export function setup(editor: Editor) {
     ),
   );
   for (const s of slots)
-    (editor.getShapeUtil("agent") as AgentShapeUtil).stack(
+    editor.getShapeUtil<AgentShapeUtil>("agent").stack(
       editor.getShape(createShapeId(`agent-${s}-9`))!,
     );
   // Power markers

@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Code Style
+
+Tight, concise, clever. Prefer short, apt, one-word variables over multi-word descriptors. Don't repeat context already established by scope or type. Be idiomatic tldraw and React.
+
 ## Commands
 
 ```bash
