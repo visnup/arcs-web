@@ -1,5 +1,5 @@
 import { type TLBaseShape } from "@tldraw/tlschema";
-import { HTMLContainer, type TLImageShape } from "tldraw";
+import { HTMLContainer } from "tldraw";
 import { GameShapeUtil } from "../game";
 import assault from "./assault.webp";
 import raid from "./raid.webp";
@@ -49,12 +49,6 @@ export class DieShapeUtil extends GameShapeUtil<DieShape> {
         }}
       />
     );
-  }
-
-  indicator(shape: DieShape) {
-    return this.editor
-      .getShapeUtil("image")
-      .indicator(shape as unknown as TLImageShape);
   }
 
   onPrimaryAction(shapes: DieShape[]) {

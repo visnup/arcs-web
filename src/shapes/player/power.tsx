@@ -25,7 +25,5 @@ export class PowerMarkerShapeUtil extends GameShapeUtil<PowerMarkerShape> {
     );
   }
 
-  indicator(shape: PowerMarkerShape) {
-    return <rect width={shape.props.w} height={shape.props.h} />;
-  }
+
 }

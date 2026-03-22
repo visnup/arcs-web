@@ -1,5 +1,5 @@
 import { createShapeId, type TLBaseShape } from "@tldraw/tlschema";
-import { HTMLContainer, type TLImageShape } from "tldraw";
+import { HTMLContainer } from "tldraw";
 import { GameShapeUtil } from "./game";
 import circle from "./block-circle.webp";
 import large from "./block-large.webp";
@@ -44,9 +44,7 @@ export class BlockShapeUtil extends GameShapeUtil<BlockShape> {
         cy={shape.props.h / 2}
       />
     ) : (
-      this.editor
-        .getShapeUtil("image")
-        .indicator(shape as unknown as TLImageShape)
+      super.indicator(shape)
     );
   }
 

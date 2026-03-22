@@ -1,5 +1,5 @@
 import { type TLBaseShape } from "@tldraw/tlschema";
-import { HTMLContainer, type TLImageShape } from "tldraw";
+import { HTMLContainer } from "tldraw";
 import src from "./board.webp";
 import { colors } from "./colors";
 import { GameShapeUtil } from "../game";
@@ -28,9 +28,5 @@ export class BoardShapeUtil extends GameShapeUtil<BoardShape> {
     );
   }
 
-  indicator(shape: BoardShape) {
-    return this.editor
-      .getShapeUtil("image")
-      .indicator(shape as unknown as TLImageShape);
-  }
+
 }

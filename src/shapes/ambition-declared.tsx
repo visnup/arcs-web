@@ -1,5 +1,4 @@
 import { type TLBaseShape } from "@tldraw/tlschema";
-import { type TLImageShape } from "tldraw";
 import { GameShapeUtil } from "./game";
 import url from "./ambition-declared.webp";
 
@@ -26,12 +25,6 @@ export class AmbitionDeclaredMarkerShapeUtil extends GameShapeUtil<AmbitionDecla
         style={{ borderRadius: 5, width: w, height: h }}
       />
     );
-  }
-
-  indicator(shape: AmbitionDeclaredMarkerShape) {
-    return this.editor
-      .getShapeUtil("image")
-      .indicator(shape as unknown as TLImageShape);
   }
 
   onTranslateStart(shape: AmbitionDeclaredMarkerShape) {

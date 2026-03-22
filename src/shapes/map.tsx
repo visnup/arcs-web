@@ -1,5 +1,5 @@
 import { type TLBaseShape } from "@tldraw/tlschema";
-import { HTMLContainer, type TLImageShape } from "tldraw";
+import { HTMLContainer } from "tldraw";
 import { GameShapeUtil } from "./game";
 import src from "./map.webp";
 
@@ -21,12 +21,6 @@ export class MapShapeUtil extends GameShapeUtil<MapShape> {
         <img className="tl-image" draggable="false" src={src} />
       </HTMLContainer>
     );
-  }
-
-  indicator(shape: MapShape) {
-    return this.editor
-      .getShapeUtil("image")
-      .indicator(shape as unknown as TLImageShape);
   }
 
   getBoundsSnapGeometry() {

@@ -1,4 +1,4 @@
-import { type TLBaseBoxShape, BaseBoxShapeUtil } from "tldraw";
+import { type TLBaseBoxShape, BaseBoxShapeUtil, toDomPrecision } from "tldraw";
 
 export abstract class GameShapeUtil<
   T extends TLBaseBoxShape,
@@ -8,5 +8,8 @@ export abstract class GameShapeUtil<
   }
   canResize() {
     return false;
+  }
+  indicator({ props: { w, h } }: T): React.ReactElement | null {
+    return <rect width={toDomPrecision(w)} height={toDomPrecision(h)} />;
   }
 }

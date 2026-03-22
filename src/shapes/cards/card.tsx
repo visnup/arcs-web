@@ -1,6 +1,6 @@
 import { shuffle } from "d3-array";
 import { type TLBaseShape } from "@tldraw/tlschema";
-import { HTMLContainer, Vec, type TLImageShape } from "tldraw";
+import { HTMLContainer, Vec } from "tldraw";
 import { GameShapeUtil } from "../game";
 import { colors as _colors } from "../player/colors";
 import type { CardHolderShape } from "./card-holder";
@@ -93,12 +93,6 @@ export class CardShapeUtil extends GameShapeUtil<CardShape> {
         }
       />
     );
-  }
-
-  indicator(shape: CardShape) {
-    return this.editor
-      .getShapeUtil("image")
-      .indicator(shape as unknown as TLImageShape);
   }
 
   onTranslateStart(shape: CardShape) {

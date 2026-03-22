@@ -8,7 +8,6 @@ import {
   HTMLContainer,
   type BindingOnCreateOptions,
   type BindingOnDeleteOptions,
-  type TLImageShape,
 } from "tldraw";
 import { GameShapeUtil } from "../game";
 import { type CardShape } from "./card";
@@ -34,12 +33,6 @@ export class CardHolderShapeUtil extends GameShapeUtil<CardHolderShape> {
         style={{ backgroundColor: "#111" }}
       ></HTMLContainer>
     );
-  }
-
-  indicator(shape: CardHolderShape) {
-    return this.editor
-      .getShapeUtil("image")
-      .indicator(shape as unknown as TLImageShape);
   }
 
   onDropShapesOver(shape: CardHolderShape, shapes: TLShape[]) {
