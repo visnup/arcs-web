@@ -1,5 +1,6 @@
 import { type TLBaseShape } from "@tldraw/tlschema";
-import { BaseBoxShapeUtil, HTMLContainer } from "tldraw";
+import { HTMLContainer } from "tldraw";
+import { GameShapeUtil } from "./game";
 import url from "./resources.webp";
 
 const aspect = 1;
@@ -18,18 +19,11 @@ type ResourceShape = TLBaseShape<
   "resource",
   { w: number; h: number; kind: ResourceKind }
 >;
-export class ResourceShapeUtil extends BaseBoxShapeUtil<ResourceShape> {
+export class ResourceShapeUtil extends GameShapeUtil<ResourceShape> {
   static override type = "resource" as const;
 
   getDefaultProps() {
     return { w, h, kind: "fuel" as const };
-  }
-
-  canResize() {
-    return false;
-  }
-  canSnap() {
-    return false;
   }
 
   component(shape: ResourceShape) {

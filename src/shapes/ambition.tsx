@@ -1,5 +1,6 @@
 import { type TLBaseShape } from "@tldraw/tlschema";
-import { BaseBoxShapeUtil, HTMLContainer } from "tldraw";
+import { HTMLContainer } from "tldraw";
+import { GameShapeUtil } from "./game";
 import ambition from "./ambition.webp";
 import ambitionBack from "./ambition-back.webp";
 
@@ -25,7 +26,7 @@ type AmbitionMarkerShape = TLBaseShape<
     index: number;
   }
 >;
-export class AmbitionMarkerShapeUtil extends BaseBoxShapeUtil<AmbitionMarkerShape> {
+export class AmbitionMarkerShapeUtil extends GameShapeUtil<AmbitionMarkerShape> {
   static override type = "ambition";
 
   getDefaultProps() {
@@ -35,13 +36,6 @@ export class AmbitionMarkerShapeUtil extends BaseBoxShapeUtil<AmbitionMarkerShap
       faceUp: false,
       index: 0,
     };
-  }
-
-  canResize() {
-    return false;
-  }
-  canSnap() {
-    return false;
   }
 
   component(shape: AmbitionMarkerShape) {

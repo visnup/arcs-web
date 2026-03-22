@@ -23,10 +23,6 @@ export class AgentShapeUtil extends StackableShapeUtil<AgentShape> {
     return { w, h, slot: 0 };
   }
 
-  canResize() {
-    return false;
-  }
-
   component(shape: AgentShape) {
     const color = colors[shape.props.slot];
     return (

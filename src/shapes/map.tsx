@@ -1,5 +1,6 @@
 import { type TLBaseShape } from "@tldraw/tlschema";
-import { BaseBoxShapeUtil, HTMLContainer, type TLImageShape } from "tldraw";
+import { HTMLContainer, type TLImageShape } from "tldraw";
+import { GameShapeUtil } from "./game";
 import src from "./map.webp";
 
 const aspect = 6963 / 3720;
@@ -7,7 +8,7 @@ const w = 1200;
 const h = w / aspect;
 
 type MapShape = TLBaseShape<"map", { w: number; h: number }>;
-export class MapShapeUtil extends BaseBoxShapeUtil<MapShape> {
+export class MapShapeUtil extends GameShapeUtil<MapShape> {
   static override type = "map" as const;
 
   getDefaultProps() {
@@ -23,7 +24,9 @@ export class MapShapeUtil extends BaseBoxShapeUtil<MapShape> {
   }
 
   indicator(shape: MapShape) {
-    return this.editor.getShapeUtil("image").indicator(shape as unknown as TLImageShape);
+    return this.editor
+      .getShapeUtil("image")
+      .indicator(shape as unknown as TLImageShape);
   }
 
   getBoundsSnapGeometry() {

@@ -1,19 +1,23 @@
-import { type TLBaseBinding, type TLBaseShape, type TLShape } from "@tldraw/tlschema";
 import {
-  BaseBoxShapeUtil,
+  type TLBaseBinding,
+  type TLBaseShape,
+  type TLShape,
+} from "@tldraw/tlschema";
+import {
   BindingUtil,
   HTMLContainer,
   type BindingOnCreateOptions,
   type BindingOnDeleteOptions,
   type TLImageShape,
 } from "tldraw";
+import { GameShapeUtil } from "../game";
 import { type CardShape } from "./card";
 
 export type CardHolderShape = TLBaseShape<
   "card-holder",
   { w: number; h: number; slot?: number }
 >;
-export class CardHolderShapeUtil extends BaseBoxShapeUtil<CardHolderShape> {
+export class CardHolderShapeUtil extends GameShapeUtil<CardHolderShape> {
   static override type = "card-holder";
 
   getDefaultProps() {
@@ -23,10 +27,6 @@ export class CardHolderShapeUtil extends BaseBoxShapeUtil<CardHolderShape> {
   canSelect() {
     return false;
   }
-  canSnap() {
-    return false;
-  }
-
   component(shape: CardHolderShape) {
     return (
       <HTMLContainer
@@ -37,7 +37,9 @@ export class CardHolderShapeUtil extends BaseBoxShapeUtil<CardHolderShape> {
   }
 
   indicator(shape: CardHolderShape) {
-    return this.editor.getShapeUtil("image").indicator(shape as unknown as TLImageShape);
+    return this.editor
+      .getShapeUtil("image")
+      .indicator(shape as unknown as TLImageShape);
   }
 
   onDropShapesOver(shape: CardHolderShape, shapes: TLShape[]) {
@@ -90,8 +92,7 @@ export class CardHolderBindingUtil extends BindingUtil<CardHolderBinding> {
     const w = bounds.reduce((sum, b) => sum + b.w, 0);
     const n = cards.length - 1;
     const overlap = w > holder.w ? (w - holder.w) / n : 10;
-    let x =
-      holder.x + (holder.w - w + overlap * n) / 2 - bounds[0].w + overlap;
+    let x = holder.x + (holder.w - w + overlap * n) / 2 - bounds[0].w + overlap;
     this.editor.updateShapes(
       cards.map((c, i) => ({
         id: c,

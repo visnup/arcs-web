@@ -1,23 +1,23 @@
-import { createShapeId, type TLBaseBinding, type TLBaseShape } from "@tldraw/tlschema";
 import {
-  BaseBoxShapeUtil,
+  createShapeId,
+  type TLBaseBinding,
+  type TLBaseShape,
+} from "@tldraw/tlschema";
+import {
   BindingUtil,
   HTMLContainer,
   type BindingOnCreateOptions,
   type BindingOnDeleteOptions,
   type TLBaseBoxShape,
 } from "tldraw";
+import { GameShapeUtil } from "./game";
 
 type StackShape = TLBaseShape<"stack", { w: number; h: number; count: number }>;
-export class StackShapeUtil extends BaseBoxShapeUtil<StackShape> {
+export class StackShapeUtil extends GameShapeUtil<StackShape> {
   static override type = "stack" as const;
 
   getDefaultProps() {
     return { w: 10, h: 10, count: 0 };
-  }
-
-  canSnap() {
-    return false;
   }
 
   component(shape: StackShape) {
@@ -35,11 +35,7 @@ export class StackShapeUtil extends BaseBoxShapeUtil<StackShape> {
 
 export abstract class StackableShapeUtil<
   T extends TLBaseBoxShape,
-> extends BaseBoxShapeUtil<T> {
-  canSnap() {
-    return false;
-  }
-
+> extends GameShapeUtil<T> {
   onTranslateStart(shape: T) {
     const bindings = this.editor.getBindingsFromShape(shape, "stack");
     this.editor.deleteBindings(bindings);

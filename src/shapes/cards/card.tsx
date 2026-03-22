@@ -1,6 +1,7 @@
 import { shuffle } from "d3-array";
 import { type TLBaseShape } from "@tldraw/tlschema";
-import { BaseBoxShapeUtil, HTMLContainer, Vec, type TLImageShape } from "tldraw";
+import { HTMLContainer, Vec, type TLImageShape } from "tldraw";
+import { GameShapeUtil } from "../game";
 import { colors as _colors } from "../player/colors";
 import type { CardHolderShape } from "./card-holder";
 
@@ -26,7 +27,7 @@ export type CardShape = TLBaseShape<
     backUrl: string;
   }
 >;
-export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
+export class CardShapeUtil extends GameShapeUtil<CardShape> {
   static override type = "card";
 
   getDefaultProps() {
@@ -40,13 +41,6 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
       frontUrl: "about:blank",
       backUrl: "about:blank",
     };
-  }
-
-  canResize() {
-    return false;
-  }
-  canSnap() {
-    return false;
   }
 
   getHolder(shape: CardShape) {
@@ -102,7 +96,9 @@ export class CardShapeUtil extends BaseBoxShapeUtil<CardShape> {
   }
 
   indicator(shape: CardShape) {
-    return this.editor.getShapeUtil("image").indicator(shape as unknown as TLImageShape);
+    return this.editor
+      .getShapeUtil("image")
+      .indicator(shape as unknown as TLImageShape);
   }
 
   onTranslateStart(shape: CardShape) {

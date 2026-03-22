@@ -26,10 +26,6 @@ export class ShipShapeUtil extends StackableShapeUtil<ShipShape> {
     return { w, h, slot: 0, faceUp: false };
   }
 
-  canResize() {
-    return false;
-  }
-
   component(shape: ShipShape) {
     const { slot, faceUp, w, h } = shape.props;
     const color = colors[slot];

@@ -1,21 +1,15 @@
 import { type TLBaseShape } from "@tldraw/tlschema";
-import { BaseBoxShapeUtil, SVGContainer } from "tldraw";
+import { SVGContainer } from "tldraw";
+import { GameShapeUtil } from "./game";
 
 export const w = 28;
 
 type ChapterMarkerShape = TLBaseShape<"chapter", { w: number; h: number }>;
-export class ChapterMarkerShapeUtil extends BaseBoxShapeUtil<ChapterMarkerShape> {
+export class ChapterMarkerShapeUtil extends GameShapeUtil<ChapterMarkerShape> {
   static override type = "chapter" as const;
 
   getDefaultProps() {
     return { w, h: w };
-  }
-
-  canResize() {
-    return false;
-  }
-  canSnap() {
-    return false;
   }
 
   component(shape: ChapterMarkerShape) {

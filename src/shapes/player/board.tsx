@@ -1,22 +1,19 @@
 import { type TLBaseShape } from "@tldraw/tlschema";
-import { BaseBoxShapeUtil, HTMLContainer, type TLImageShape } from "tldraw";
+import { HTMLContainer, type TLImageShape } from "tldraw";
 import src from "./board.webp";
 import { colors } from "./colors";
+import { GameShapeUtil } from "../game";
 
 const aspect = 2579 / 1033;
 export const w = 400;
 export const h = w / aspect;
 
 type BoardShape = TLBaseShape<"board", { w: number; h: number; slot: number }>;
-export class BoardShapeUtil extends BaseBoxShapeUtil<BoardShape> {
+export class BoardShapeUtil extends GameShapeUtil<BoardShape> {
   static override type = "board" as const;
 
   getDefaultProps() {
     return { w, h, slot: 0 };
-  }
-
-  canSnap() {
-    return false;
   }
 
   component(shape: BoardShape) {
@@ -32,6 +29,8 @@ export class BoardShapeUtil extends BaseBoxShapeUtil<BoardShape> {
   }
 
   indicator(shape: BoardShape) {
-    return this.editor.getShapeUtil("image").indicator(shape as unknown as TLImageShape);
+    return this.editor
+      .getShapeUtil("image")
+      .indicator(shape as unknown as TLImageShape);
   }
 }

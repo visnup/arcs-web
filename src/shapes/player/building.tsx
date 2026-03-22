@@ -20,10 +20,6 @@ class BuildingShapeUtil extends StackableShapeUtil<BuildingShape> {
     return { w, h, slot: 0, faceUp: true };
   }
 
-  canResize() {
-    return false;
-  }
-
   component(shape: BuildingShape) {
     const url =
       shape.type === "city"

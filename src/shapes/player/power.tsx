@@ -1,6 +1,7 @@
 import { type TLBaseShape } from "@tldraw/tlschema";
-import { BaseBoxShapeUtil, SVGContainer } from "tldraw";
+import { SVGContainer } from "tldraw";
 import { colors } from "./colors";
+import { GameShapeUtil } from "../game";
 
 export const w = 12;
 
@@ -8,18 +9,11 @@ type PowerMarkerShape = TLBaseShape<
   "power",
   { w: number; h: number; slot: number }
 >;
-export class PowerMarkerShapeUtil extends BaseBoxShapeUtil<PowerMarkerShape> {
+export class PowerMarkerShapeUtil extends GameShapeUtil<PowerMarkerShape> {
   static override type = "power" as const;
 
   getDefaultProps() {
     return { w, h: w, slot: 0 };
-  }
-
-  canResize() {
-    return false;
-  }
-  canSnap() {
-    return false;
   }
 
   component(shape: PowerMarkerShape) {

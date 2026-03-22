@@ -1,5 +1,6 @@
 import { type TLBaseShape } from "@tldraw/tlschema";
-import { BaseBoxShapeUtil, SVGContainer } from "tldraw";
+import { SVGContainer } from "tldraw";
+import { GameShapeUtil } from "./game";
 
 const aspect = 104 / 318;
 export const w = 30;
@@ -14,18 +15,11 @@ const Path = (props: React.SVGProps<SVGPathElement>) => (
 );
 
 type InitiativeMakerShape = TLBaseShape<"initiative", { w: number; h: number }>;
-export class InitiativeMarkerShapeUtil extends BaseBoxShapeUtil<InitiativeMakerShape> {
+export class InitiativeMarkerShapeUtil extends GameShapeUtil<InitiativeMakerShape> {
   static override type = "initiative" as const;
 
   getDefaultProps() {
     return { w, h };
-  }
-
-  canResize() {
-    return false;
-  }
-  canSnap() {
-    return false;
   }
 
   component(shape: InitiativeMakerShape) {

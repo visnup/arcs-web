@@ -1,5 +1,6 @@
 import { type TLBaseShape } from "@tldraw/tlschema";
-import { BaseBoxShapeUtil, type TLImageShape } from "tldraw";
+import { type TLImageShape } from "tldraw";
+import { GameShapeUtil } from "./game";
 import url from "./ambition-declared.webp";
 
 const aspect = 500 / 126;
@@ -10,18 +11,11 @@ type AmbitionDeclaredMarkerShape = TLBaseShape<
   "ambition-declared",
   { w: number; h: number }
 >;
-export class AmbitionDeclaredMarkerShapeUtil extends BaseBoxShapeUtil<AmbitionDeclaredMarkerShape> {
+export class AmbitionDeclaredMarkerShapeUtil extends GameShapeUtil<AmbitionDeclaredMarkerShape> {
   static override type = "ambition-declared";
 
   getDefaultProps() {
     return { w, h };
-  }
-
-  canResize() {
-    return false;
-  }
-  canSnap() {
-    return false;
   }
 
   component(shape: AmbitionDeclaredMarkerShape) {
@@ -35,7 +29,9 @@ export class AmbitionDeclaredMarkerShapeUtil extends BaseBoxShapeUtil<AmbitionDe
   }
 
   indicator(shape: AmbitionDeclaredMarkerShape) {
-    return this.editor.getShapeUtil("image").indicator(shape as unknown as TLImageShape);
+    return this.editor
+      .getShapeUtil("image")
+      .indicator(shape as unknown as TLImageShape);
   }
 
   onTranslateStart(shape: AmbitionDeclaredMarkerShape) {

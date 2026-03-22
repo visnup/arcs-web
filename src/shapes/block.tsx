@@ -1,5 +1,6 @@
 import { createShapeId, type TLBaseShape } from "@tldraw/tlschema";
-import { BaseBoxShapeUtil, HTMLContainer, type TLImageShape } from "tldraw";
+import { HTMLContainer, type TLImageShape } from "tldraw";
+import { GameShapeUtil } from "./game";
 import circle from "./block-circle.webp";
 import large from "./block-large.webp";
 import small from "./block-small.webp";
@@ -14,18 +15,11 @@ type BlockShape = TLBaseShape<
   "block",
   { w: number; h: number; kind: BlockKind }
 >;
-export class BlockShapeUtil extends BaseBoxShapeUtil<BlockShape> {
+export class BlockShapeUtil extends GameShapeUtil<BlockShape> {
   static override type = "block" as const;
 
   getDefaultProps() {
     return blocks.circle.props;
-  }
-
-  canResize() {
-    return false;
-  }
-  canSnap() {
-    return false;
   }
 
   component(shape: BlockShape) {
@@ -50,7 +44,9 @@ export class BlockShapeUtil extends BaseBoxShapeUtil<BlockShape> {
         cy={shape.props.h / 2}
       />
     ) : (
-      this.editor.getShapeUtil("image").indicator(shape as unknown as TLImageShape)
+      this.editor
+        .getShapeUtil("image")
+        .indicator(shape as unknown as TLImageShape)
     );
   }
 

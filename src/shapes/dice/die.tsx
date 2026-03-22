@@ -1,5 +1,6 @@
 import { type TLBaseShape } from "@tldraw/tlschema";
-import { BaseBoxShapeUtil, HTMLContainer, type TLImageShape } from "tldraw";
+import { HTMLContainer, type TLImageShape } from "tldraw";
+import { GameShapeUtil } from "../game";
 import assault from "./assault.webp";
 import raid from "./raid.webp";
 import skirmish from "./skirmish.webp";
@@ -18,7 +19,7 @@ type DieShape = TLBaseShape<
   }
 >;
 const urls: Record<DieKind, string> = { assault, raid, skirmish };
-export class DieShapeUtil extends BaseBoxShapeUtil<DieShape> {
+export class DieShapeUtil extends GameShapeUtil<DieShape> {
   static override type = "die";
 
   getDefaultProps() {
@@ -28,13 +29,6 @@ export class DieShapeUtil extends BaseBoxShapeUtil<DieShape> {
       face: 0,
       kind: "assault" as const,
     };
-  }
-
-  canResize() {
-    return false;
-  }
-  canSnap() {
-    return false;
   }
 
   component(shape: DieShape) {
@@ -58,7 +52,9 @@ export class DieShapeUtil extends BaseBoxShapeUtil<DieShape> {
   }
 
   indicator(shape: DieShape) {
-    return this.editor.getShapeUtil("image").indicator(shape as unknown as TLImageShape);
+    return this.editor
+      .getShapeUtil("image")
+      .indicator(shape as unknown as TLImageShape);
   }
 
   onPrimaryAction(shapes: DieShape[]) {
