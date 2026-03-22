@@ -11,6 +11,7 @@ import {
   type TLBaseBoxShape,
 } from "tldraw";
 import { GameShapeUtil } from "./game";
+import { snapTarget } from "./snap";
 
 type StackShape = TLBaseShape<"stack", { w: number; h: number; count: number }>;
 export class StackShapeUtil extends GameShapeUtil<StackShape> {
@@ -41,8 +42,10 @@ export abstract class StackableShapeUtil<
     this.editor.deleteBindings(bindings);
   }
 
-  onTranslateEnd(_initial: T, shape: T) {
-    this.stack(shape);
+  onTranslateEnd(initial: T, shape: T) {
+    const willSnap = snapTarget.get()?.shapeId === shape.id;
+    super.onTranslateEnd(initial, shape);
+    if (!willSnap) this.stack(shape);
   }
 
   stack(shape: T) {

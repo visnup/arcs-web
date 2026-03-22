@@ -2,6 +2,7 @@ import { shuffle } from "d3-array";
 import { type TLBaseShape } from "@tldraw/tlschema";
 import { HTMLContainer, Vec } from "tldraw";
 import { GameShapeUtil } from "../game";
+import { snapTarget } from "../snap";
 import { colors as _colors } from "../player/colors";
 import type { CardHolderShape } from "./card-holder";
 
@@ -104,6 +105,9 @@ export class CardShapeUtil extends GameShapeUtil<CardShape> {
   }
 
   onTranslateEnd(_initial: CardShape, shape: CardShape) {
+    const willSnap = snapTarget.get()?.shapeId === shape.id;
+    super.onTranslateEnd(_initial, shape);
+    if (willSnap) return;
     const pageBounds = this.editor.getShapePageBounds(shape);
     const center = pageBounds
       ? { x: pageBounds.midX, y: pageBounds.midY }

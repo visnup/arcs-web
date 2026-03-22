@@ -20,10 +20,18 @@ import { customBindingUtils, customShapeUtils } from "./shapes";
 import { colors } from "./shapes/player/colors";
 import { SharePanel } from "./SharePanel";
 import { Preview } from "./Preview";
+import { SnapPreview } from "./SnapPreview";
 
 const WORKER_URL = process.env.TLDRAW_WORKER_URL;
 const shapeUtils = [...defaultShapeUtils, ...customShapeUtils];
 const bindingUtils = [...defaultBindingUtils, ...customBindingUtils];
+
+const Overlays = () => (
+  <>
+    <Preview />
+    <SnapPreview />
+  </>
+);
 
 const components: TLComponents = {
   SelectionBackground: null,
@@ -31,7 +39,7 @@ const components: TLComponents = {
   SharePanel: SharePanel,
   StylePanel: null,
   Toolbar: null,
-  InFrontOfTheCanvas: Preview,
+  InFrontOfTheCanvas: Overlays,
 };
 
 const overrides: TLUiOverrides = {

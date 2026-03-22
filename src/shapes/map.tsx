@@ -1,6 +1,7 @@
 import { type TLBaseShape } from "@tldraw/tlschema";
 import { HTMLContainer } from "tldraw";
 import { GameShapeUtil } from "./game";
+import { type Snap } from "./snap";
 import src from "./map.webp";
 
 const aspect = 6963 / 3720;
@@ -23,15 +24,11 @@ export class MapShapeUtil extends GameShapeUtil<MapShape> {
     );
   }
 
-  getBoundsSnapGeometry() {
-    return {
-      points: [
-        // { x: 75, y: 550, z: 0 }, // ambition declared
-        { x: 78, y: 463, z: 0 }, // card 1 (lead)
-        { x: 78, y: 344, z: 0 }, // card 2
-        { x: 78, y: 262, z: 0 }, // card 3
-        { x: 78, y: 179, z: 0 }, // card 4
-      ],
-    };
+  getSnaps(_shape: MapShape): Snap[] {
+    return [
+      // center of ambition-declared at initial position:
+      // shape at x:27 y:538 size 95×24 → center {75, 550}
+      { x: 75, y: 550, rotation: 0, accepts: (s) => s.type === "ambition-declared" },
+    ];
   }
 }
