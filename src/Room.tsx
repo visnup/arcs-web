@@ -19,7 +19,7 @@ import { setup } from "./setup";
 import { customBindingUtils, customShapeUtils } from "./shapes";
 import { colors } from "./shapes/player/colors";
 import { SharePanel } from "./SharePanel";
-import { CardPreview } from "./CardPreview";
+import { Preview } from "./Preview";
 
 const WORKER_URL = process.env.TLDRAW_WORKER_URL;
 const shapeUtils = [...defaultShapeUtils, ...customShapeUtils];
@@ -31,7 +31,7 @@ const components: TLComponents = {
   SharePanel: SharePanel,
   StylePanel: null,
   Toolbar: null,
-  InFrontOfTheCanvas: CardPreview,
+  InFrontOfTheCanvas: Preview,
 };
 
 const overrides: TLUiOverrides = {
@@ -78,7 +78,8 @@ export default function Room({ room }: RoomProps) {
   });
 
   const onMount = useCallback<TLOnMountHandler>((editor) => {
-    if (import.meta.env.DEV) (window as unknown as Record<string, unknown>).__editor = editor;
+    if (import.meta.env.DEV)
+      (window as unknown as Record<string, unknown>).__editor = editor;
     const map = editor.getShape(createShapeId("map"));
     const url = new URL(window.location.toString());
     if (!map || url.searchParams.has("new")) setup(editor);

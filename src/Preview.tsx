@@ -9,7 +9,7 @@ const colors = Object.fromEntries(
 );
 const SCALE = 5;
 
-export const CardPreview = track(function CardPreview() {
+export const Preview = track(function CardPreview() {
   const editor = useEditor();
   const [alt, setAlt] = useState(false);
 
