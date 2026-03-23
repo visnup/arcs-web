@@ -26,6 +26,9 @@ export class CardHolderShapeUtil extends GameShapeUtil<CardHolderShape> {
   canSelect() {
     return false;
   }
+  canDropShapes(_shape: CardHolderShape, shapes: TLShape[]) {
+    return shapes.every((s) => s.type === "card");
+  }
   component(shape: CardHolderShape) {
     return (
       <HTMLContainer
