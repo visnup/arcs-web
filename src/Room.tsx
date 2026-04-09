@@ -112,6 +112,7 @@ export default function Room({ room }: RoomProps) {
         components={components}
         overrides={overrides}
         onMount={onMount}
+        licenseKey="tldraw-2026-07-18/WyJldzMzQUpFVyIsWyIqIl0sMTYsIjIwMjYtMDctMTgiXQ.yoJ8ADWDl2JXwJYxISkIoBuQ1hKwL7T7dx6vaWsXNmlPPgvW8fdq2NuM+KR2qekePlrHnrFmDn4pKmxrj2TVdQ"
         deepLinks
       />
     </div>
